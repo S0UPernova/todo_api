@@ -9,5 +9,15 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+
+  def get_new_token(user, expire_date_modifier)
+    exp = Time.now.to_i + expire_date_modifier
+    payload = {
+      data: {
+        "user_id": user.id
+      },
+      exp: exp
+    }
+    JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
+  end
 end
