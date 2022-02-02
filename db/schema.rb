@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_024040) do
+ActiveRecord::Schema.define(version: 2022_02_01_002851) do
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "requirements"
+    t.integer "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id", "created_at"], name: "index_projects_on_team_id_and_created_at"
+    t.index ["team_id"], name: "index_projects_on_team_id"
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
@@ -31,5 +42,6 @@ ActiveRecord::Schema.define(version: 2022_01_30_024040) do
     t.string "password_digest"
   end
 
+  add_foreign_key "projects", "teams"
   add_foreign_key "teams", "users"
 end

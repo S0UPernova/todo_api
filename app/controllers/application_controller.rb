@@ -53,7 +53,6 @@ class ApplicationController < ActionController::API
   end
 
 
-  
   def current_user
     begin
       token = request.headers["Authorization"]
@@ -71,6 +70,7 @@ class ApplicationController < ActionController::API
     head :forbidden
     false
   end
+<<<<<<< HEAD
 
   def correct_user(model)
     begin
@@ -86,4 +86,6 @@ class ApplicationController < ActionController::API
     head :forbidden
     false
   end
+=======
+>>>>>>> projects
 end

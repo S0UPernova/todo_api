@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
 
   def update
     team = Team.find(params[:id])
-    if correct_user(Team)
+    if correct_user
       if team.update(team_params)
         render json: team
       else
@@ -36,9 +36,8 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    if correct_user(Team)
-      team = @model
-      team.destroy
+    if correct_user
+      @team.destroy
       render json: params, status: :no_content
     else
       head :forbidden
@@ -48,5 +47,20 @@ class TeamsController < ApplicationController
   private
     def team_params
       params.require(:team).permit(:name, :description)
+    end
+
+    def correct_user
+      begin
+        @team = Team.find(params[:id])
+        return false unless @team.id
+        if @team.user_id == current_user.id
+          return true
+        else
+          head :forbidden
+          return false
+        end
+      end
+      head :forbidden
+      false
     end
 end

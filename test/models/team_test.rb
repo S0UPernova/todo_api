@@ -27,11 +27,6 @@ class TeamTest < ActiveSupport::TestCase
     assert_not duplicate_team.valid?
   end
 
-  test "description should be present" do
-    @team.description = "    "
-    assert_not @team.valid?
-  end
-
   test "description should not be too long" do
     @team.description = "a" * 141
     assert_not @team.valid?

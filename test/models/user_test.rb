@@ -7,8 +7,23 @@ class UserTest < ActiveSupport::TestCase
 
   test "should be valid" do
     assert @user.valid?
+<<<<<<< HEAD
     end
   
+=======
+  end
+  
+  test "handle should be present" do
+    @user.handle = "    "
+    assert_not @user.valid?
+  end
+
+  test "handle should not be too long" do
+    @user.handle = "a" * 51
+    assert_not @user.valid?
+  end
+
+>>>>>>> projects
   test "name should be present" do
     @user.name = "    "
     assert_not @user.valid?
