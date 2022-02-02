@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+team_one_project_one:
+  name: project_one
+  description: MyText
+  requirements: MyText
+  team: team_one
+
+team_one_project_two:
+  name: project_two
+  description: MyText
+  requirements: MyText
+  team: team_one
+
+team_two_project_one:
+  name: project
+  description: MyText
+  requirements: MyText
+  team: team_two

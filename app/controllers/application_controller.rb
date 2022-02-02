@@ -39,8 +39,8 @@ class ApplicationController < ActionController::API
     return true
   end
 
-# this is separate because response.body does not work from here,
-# so I needed bools for the if statements above
+  # this is separate because response.body does not work from here,
+  # so I needed bools for the if statements above
   def token_expired(token)
     begin
       decoded_token = decode_token(token)
@@ -50,5 +50,24 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError
     end
     return false
+  end
+
+
+  def current_user
+    begin
+      token = request.headers["Authorization"]
+      token_id = decode_token(token)[0]["data"]["user_id"]
+      user = User.find(token_id)
+      if user
+        return user
+      else
+        head :forbidden
+        return false
+      end
+    rescue JWT::DecodeError
+      Rails.logger.warn "Error decoding the JWT: "
+    end
+    head :forbidden
+    false
   end
 end

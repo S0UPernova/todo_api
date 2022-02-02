@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+team_one:
+  name: first_team
+  description: first_team_description
+  created_at: <%= 10.minutes.ago %>
+  user: michael
+
+team_two:
+  name: second_team
+  description: second_team_description
+  user: archer

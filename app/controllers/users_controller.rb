@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
   # TODO add serializers/representers
   before_action :correct_user,   only: [:edit, :update, :destroy]
-  before_action :require_jwt, only: [:index, :edit, :update, :destroy]
+  before_action :require_jwt, only: [:index, :show, :update, :destroy]
 
   def index  
     render json: User.all
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:handle, :name, :email, :password, :password_confirmation, :Authorization)
+      params.require(:user).permit(:handle, :name, :email, :password, :password_confirmation)
     end
     # TODO add logic for cookies
     def correct_user
