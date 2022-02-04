@@ -70,22 +70,4 @@ class ApplicationController < ActionController::API
     head :forbidden
     false
   end
-<<<<<<< HEAD
-
-  def correct_user(model)
-    begin
-      @model = model.find(params[:id])
-      return false unless @model
-      if @model.user_id == current_user.id
-        return true
-      else
-        head :forbidden
-        return false
-      end
-    end
-    head :forbidden
-    false
-  end
-=======
->>>>>>> projects
 end

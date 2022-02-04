@@ -13,24 +13,24 @@ class ProjectsIndexTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
   
-  test "should not show projects index users that are not in the team" do
+  test "should not get projects index to users that are not in the team" do
     get team_projects_path(@team),
     headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
     assert_response :forbidden
   end
 
-  test "should not show projects index without authorization header" do
+  test "should not get projects index with incorrect authorization header" do
     get team_projects_path(@team)
     assert_response :forbidden
   end
 
-  test "should not show projects index will empty authorization header" do
+  test "should not get projects index with empty authorization header" do
     get team_projects_path(@team),
     headers: { 'Authorization' => "" }
     assert_response :forbidden
   end
 
-  test "should not show projects index with empty authorization label for token" do
+  test "should not get projects index with empty authorization label for token" do
     get team_projects_path(@team),
     headers: { '' => "#{User.new_token(@first_user)}"}
     assert_response :forbidden

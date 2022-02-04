@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :get_team
+  before_action :correct_user
   before_action :set_project, only: [:show, :update, :destroy]
-  before_action :correct_user#, only: [:show, :update, :destroy]
 
   def index
     @projects = @team.projects
@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.team_id = @team.id
     if @project.save
-      render json: @project, status: :created
+      render json: @project, status: :created, location: team_project_url(@team, @project)
     else
       render json: @project.errors, status: :unprocessable_entity
     end

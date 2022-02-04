@@ -47,7 +47,7 @@ class ProjectsCreateTest < ActionDispatch::IntegrationTest
   test "should not create project with incorrect token" do
     assert_no_difference('Project.count') do
       post team_projects_url(@team), headers: { 'Authorization' => "#{User.new_token(@second_user)}" },
-      params: { project: { description: @project.description, name: @project.name,
+      params: { project: { description: @project.description, name: 'project name',
         requirements: @project.requirements, team_id: @project.team_id } }, as: :json
     end
 

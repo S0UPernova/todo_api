@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+team_one_task_one:
+  name: project_one
+  description: MyText
+  project: team_one_project_one
+  completed: true
+team_one_task_two:
+  name: project_one
+  description: MyText
+  project: team_one_project_one
+team_two_task_one:
+  name: project_one
+  description: MyText
+  project: team_one_project_two
