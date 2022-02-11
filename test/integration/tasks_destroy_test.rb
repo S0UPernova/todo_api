@@ -15,7 +15,7 @@ class TasksDestroyTest < ActionDispatch::IntegrationTest
         headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
     end
 
-    assert_response 204
+    assert_response :no_content
   end
 
   test "should not destroy task without authorization header" do

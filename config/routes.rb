@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     resources :projects, only: [:show, :index, :create, :update, :destroy] do
       resources :tasks, only: [:show, :index, :create, :update, :destroy]
     end
+    resources :teams_relationships, only: [:show, :index, :create, :update, :destroy], path: 'members'
   end
 end

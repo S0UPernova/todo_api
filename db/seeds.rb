@@ -17,20 +17,54 @@ User.create!(name: 'secondUser',
   password: 'foobar',
   password_confirmation: "foobar")
 
-User.first.teams.create!(name: 'firstTeam', description: "firstTeam description")
+Team.create(
+  user_id: User.first.id,
+  name: 'firstTeam',
+  description: "firstTeam description")
 
-User.second.teams.create(name: 'secondTeam', description: "secondTeam description")
+Team.create(
+  user_id: User.second.id,
+  name: 'secondTeam',
+  description: "secondTeam description")
+  
+Project.create(
+  team_id: Team.first.id,
+  name: 'firstProjectName',
+  description: "project description",
+  requirements: "list of requirements, should be a json string")
 
-Team.find_by(name: 'firstTeam').projects.create(name: 'firstProjectName', description: "project description",
-                                                requirements: "list of requirements, should be a json string")
+Project.create(
+  team_id: Team.first.id,
+  name: 'secondProjectName',
+  description: "project description",
+  requirements: "list of requirements, should be a json string")
 
-Team.find_by(name: 'secondTeam').projects.create(name: 'secondProjectName', description: "project description",
-                                                requirements: "list of requirements, should be a json string")
+Project.create(
+  team_id: Team.second.id,
+  name: 'thirdProjectName',
+  description: "project description",
+  requirements: "list of requirements, should be a json string")
 
-Team.find_by(name: 'firstTeam').projects.create(name: 'thirdProjectName', description: "project description",
-                                                requirements: "list of requirements, should be a json string")
+Task.create(
+  project_id: Project.first.id,
+  name: 'taskName',
+  description: "task description")
 
-Project.find_by(name: 'firstProjectName').tasks.create(name: 'taskName', description: "task description")
-Project.find_by(name: 'firstProjectName').tasks.create(name: 'secondTaskName', description: "second task description")
-Project.find_by(name: 'secondProjectName').tasks.create(name: 'thirdTaskName', description: "Third task description")
-Project.find_by(name: 'thirdProjectName').tasks.create(name: 'fourthTaskName', description: "second task description")
+Task.create(
+  project_id: Project.first.id,
+  name: 'secondTaskName',
+  description: "second task description")
+
+Task.create(
+  project_id: Project.second.id,
+  name: 'thirdTaskName',
+  description: "Third task description")
+
+Task.create(
+  project_id: Project.third.id,
+  name: 'fourthTaskName',
+  description: "second task description")
+
+TeamsRelationship.create({
+  user_id: User.second.id,
+  team_id: Team.first.id})
