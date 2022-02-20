@@ -11,3 +11,9 @@ archer:
   name: Sterling Archer
   email: duchess@example.gov
   password_digest: <%= User.digest('password') %>
+
+trey:
+  handle: th3rd
+  name: third person perspective
+  email: th3rd@example.gov
+  password_digest: <%= User.digest('password') %>

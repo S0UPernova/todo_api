@@ -10,3 +10,8 @@ team_two:
   name: second_team
   description: second_team_description
   user: archer
+
+team_three:
+  name: third_team
+  description: second_team_description
+  user: archer

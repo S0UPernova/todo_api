@@ -9,13 +9,14 @@ class ProjectsIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "should get projects index" do
-    get team_projects_url(@team), headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
+    get team_projects_url(@team),
+      headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
     assert_response :success
   end
   
   test "should not get projects index to users that are not in the team" do
     get team_projects_path(@team),
-    headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
+      headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
     assert_response :forbidden
   end
 
@@ -26,13 +27,13 @@ class ProjectsIndexTest < ActionDispatch::IntegrationTest
 
   test "should not get projects index with empty authorization header" do
     get team_projects_path(@team),
-    headers: { 'Authorization' => "" }
+      headers: { 'Authorization' => "" }
     assert_response :forbidden
   end
 
   test "should not get projects index with empty authorization label for token" do
     get team_projects_path(@team),
-    headers: { '' => "#{User.new_token(@first_user)}"}
+      headers: { '' => "#{User.new_token(@first_user)}"}
     assert_response :forbidden
   end
 end

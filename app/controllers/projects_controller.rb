@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.team_id = @team.id
     if @project.save
-      render json: @project, status: :created, location: team_project_url(@team, @project)
+      render json: @project, status: :created,
+        location: team_project_url(@team, @project)
     else
       render json: @project.errors, status: :unprocessable_entity
     end

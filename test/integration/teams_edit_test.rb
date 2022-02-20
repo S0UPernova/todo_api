@@ -10,34 +10,59 @@ class TeamsEditTest < ActionDispatch::IntegrationTest
   test "should get update" do
     patch team_path(@first_team),
       headers: { 'Authorization' => "#{User.new_token(@first_user)}" },
-      params: { team: { name: "team", description: 'description' } }
-      assert_response :success
+      params: {
+        team: {
+          name: "team",
+          description: 'description'
+        }
+      }
+    assert_response :success
   end
 
   test "should not update team with incorrect token" do
     patch team_path(@first_team),
-    headers: { 'Authorization' => "#{User.new_token(@second_user)}" },
-    params: { team: { name: "team", description: 'description' } }
+      headers: { 'Authorization' => "#{User.new_token(@second_user)}" },
+      params: {
+        team: {
+          name: "team",
+          description: 'description'
+        }
+      }
     assert_response :forbidden
   end
 
   test "should not update team without authorization header" do
     patch team_path(@first_team),
-    params: { team: { name: "team", description: 'description' } }
+      params: {
+        team: {
+          name: "team",
+          description: 'description'
+        }
+      }
     assert_response :forbidden
   end
 
   test "should not update team will empty authorization header" do
     patch team_path(@first_team),
-    headers: { 'Authorization' => "" },
-    params: { team: { name: "team", description: 'description' } }
+      headers: { 'Authorization' => "" },
+      params: {
+        team: {
+          name: "team",
+          description: 'description'
+        }
+      }
     assert_response :forbidden
   end
 
   test "should not update team with empty authorization label for token" do
     patch team_path(@first_team),
-    headers: { '' => "#{User.new_token(@first_user)}"},
-    params: { team: { name: "team", description: 'description' } }
+      headers: { '' => "#{User.new_token(@first_user)}"},
+      params: {
+        team: {
+          name: "team",
+          description: 'description'
+        }
+      }
     assert_response :forbidden
   end
 end

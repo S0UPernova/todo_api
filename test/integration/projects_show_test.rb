@@ -9,7 +9,8 @@ class ProjectsShowTest < ActionDispatch::IntegrationTest
   end
 
   test "should show project" do
-    get team_project_url(@team, @project), headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
+    get team_project_url(@team, @project),
+      headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
   
     assert_response :success
   end
@@ -21,13 +22,15 @@ class ProjectsShowTest < ActionDispatch::IntegrationTest
   end
 
   test "should not show project with empty authorization header" do
-    get team_project_url(@team, @project), headers: { 'Authorization' => "" }, as: :json
+    get team_project_url(@team, @project),
+      headers: { 'Authorization' => "" }, as: :json
   
     assert_response :forbidden
   end
 
   test "should not show project with incorrect authorization header" do
-    get team_project_url(@team, @project), headers: { 'Authorization' => "#{User.new_token(@other_user)}" }, as: :json
+    get team_project_url(@team, @project),
+      headers: { 'Authorization' => "#{User.new_token(@other_user)}" }, as: :json
   
     assert_response :forbidden
   end

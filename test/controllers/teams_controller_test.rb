@@ -6,12 +6,14 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     @first_team = teams(:team_one)
   end
   test "should get show" do
-    get teams_path(@first_team), headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
+    get teams_path(@first_team),
+    headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
     assert_response :success
   end
 
   test "should get index" do
-    get teams_path, headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
+    get teams_path,
+    headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
     
     assert_response :success
   end
@@ -19,14 +21,22 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   test "should get create" do
     post teams_path,
       headers: { 'Authorization' => "#{User.new_token(@first_user)}" },
-      params: { team: { name: "second team", description: 'second description' } }
+      params: {
+        team: {
+        name: "second team",
+        description: 'second description' }
+      }
     assert_response :success
   end
 
   test "should get update" do
     patch team_path(@first_team),
       headers: { 'Authorization' => "#{User.new_token(@first_user)}" },
-      params: { team: { name: "team", description: 'description' } }
+      params: {
+        team: {
+        name: "team",
+        description: 'description' }
+      }
       assert_response :success
   end
 

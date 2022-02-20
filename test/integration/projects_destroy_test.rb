@@ -10,7 +10,8 @@ class ProjectsDestroyTest < ActionDispatch::IntegrationTest
 
   test "should destroy project" do
     assert_difference('Project.count', -1) do
-      delete team_project_url(@team, @project), headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
+      delete team_project_url(@team, @project),
+        headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
     end
   
     assert_response :no_content
@@ -26,7 +27,8 @@ class ProjectsDestroyTest < ActionDispatch::IntegrationTest
 
   test "should not destroy project with empty authorization header" do
     assert_no_difference('Project.count', -1) do
-      delete team_project_url(@team, @project), headers: { 'Authorization' => "" }, as: :json
+      delete team_project_url(@team, @project),
+        headers: { 'Authorization' => "" }, as: :json
     end
   
     assert_response :forbidden
@@ -34,7 +36,8 @@ class ProjectsDestroyTest < ActionDispatch::IntegrationTest
 
   test "should not destroy project with incorrect authorization header" do
     assert_no_difference('Project.count', -1) do
-      delete team_project_url(@team, @project), headers: { 'Authorization' => "#{User.new_token(@other_user)}" }, as: :json
+      delete team_project_url(@team, @project),
+        headers: { 'Authorization' => "#{User.new_token(@other_user)}" }, as: :json
     end
   
     assert_response :forbidden

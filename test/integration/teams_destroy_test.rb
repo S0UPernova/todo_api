@@ -9,13 +9,13 @@ class TeamsDestroyTest < ActionDispatch::IntegrationTest
 
   test "should delete team" do
     delete team_path(@first_team),
-    headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
+      headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
     assert_response :success
   end
   
   test "should not delete team with incorrect token" do
     delete team_path(@first_team),
-    headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
+      headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
     assert_response :forbidden
   end
 
@@ -26,13 +26,13 @@ class TeamsDestroyTest < ActionDispatch::IntegrationTest
 
   test "should not delete team will empty authorization header" do
     delete team_path(@first_team),
-    headers: { 'Authorization' => "" }
+      headers: { 'Authorization' => "" }
     assert_response :forbidden
   end
 
   test "should not delete team with empty authorization label for token" do
     delete team_path(@first_team),
-    headers: { '' => "#{User.new_token(@first_user)}"}
+      headers: { '' => "#{User.new_token(@first_user)}"}
     assert_response :forbidden
   end
 end

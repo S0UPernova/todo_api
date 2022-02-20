@@ -9,13 +9,13 @@ class TeamsShowTest < ActionDispatch::IntegrationTest
   
   test "should show team" do
     get team_path(@first_team),
-    headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
+      headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
     assert_response :success
   end
   
   test "should show team to other users" do
     get team_path(@first_team),
-    headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
+      headers: { 'Authorization' => "#{User.new_token(@second_user)}" }
     assert_response :success
   end
 
@@ -26,13 +26,13 @@ class TeamsShowTest < ActionDispatch::IntegrationTest
 
   test "should not show team will empty authorization header" do
     get team_path(@first_team),
-    headers: { 'Authorization' => "" }
+      headers: { 'Authorization' => "" }
     assert_response :forbidden
   end
 
   test "should not show team with empty authorization label for token" do
     get team_path(@first_team),
-    headers: { '' => "#{User.new_token(@first_user)}"}
+      headers: { '' => "#{User.new_token(@first_user)}"}
     assert_response :forbidden
   end
 end
