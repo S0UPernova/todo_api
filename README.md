@@ -22,7 +22,13 @@ Authorization required for most endpoints.
 
 ### Token
 - New token: GET /key/new
+
+<br>
+
 ### Users
+
+<br>
+
 - Create: POST /users
   - takes params
   ```
@@ -36,11 +42,20 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Index: GET /users
   - Requires valid token in header.
+
+<br>
+
 - Show: GET /users/user_id
   - user_id = the users id.
   - Requires valid token in header.
+
+<br>
+
 - Edit: PATCH /users/ID
   - ID = the users id.
   - Requires the token belonging to the user in header.
@@ -57,6 +72,9 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Delete: DELETE /users/user_id
   - user_id = the users id.
   - Requires the token belonging to the user in header.
@@ -64,6 +82,8 @@ Authorization required for most endpoints.
   <br>
 
 ### Teams
+
+<br>
 
 - Create: POST /teams
   - Requires valid token in header.
@@ -76,11 +96,20 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Index: GET /teams
   - Requires valid token in header.
+
+<br>
+
 - Show: GET /teams/team_id
   - team_id = the teams id.
   - Requires valid token in header.
+
+<br>
+
 - Edit: PATCH /teams/ID
   - ID = the teams id.
   - Requires the token belonging to the team owner in header.
@@ -94,6 +123,9 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Delete: DELETE /teams/team_id
   - team_id = the teams id.
   - Requires the token belonging to the team owner in header.
@@ -101,6 +133,8 @@ Authorization required for most endpoints.
   <br>
 
 ### Projects
+
+<br>
 
 - Create: POST /team/team_id/projects
   - team_id = the teams id.
@@ -116,13 +150,22 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Index: GET /teams/team_id/projects
   -  team_id = the teams id.
   - Requires valid token in header.
+
+<br>
+
 - Show: GET /teams/team_id/projects/project_id
   - team_id = the teams id.
   - project_id = the project id.
   - Requires valid token in header.
+
+<br>
+  
 - Edit: PATCH /teams/team_id/projects/project_id
   - team_id = the teams id.
   - project_id = the project id.
@@ -138,6 +181,9 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+
 - Delete: DELETE /teams/team_id/projects/project_id
   - team_id = the teams id.
   - project_id = the project id.
@@ -146,6 +192,9 @@ Authorization required for most endpoints.
 <br>
 
 ### Tasks
+
+<br>
+
 - Create: POST /team/projects/project_id/tasks
   - team_id = the teams id.
   - project_id = the projects id.
@@ -163,15 +212,24 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+  
 - Index: GET /teams/team_id/projects/project_id/tasks
   - team_id = the teams id.
   - project_id = the projects id.
   - Requires valid token in header.
+
+<br>
+  
 - Show: GET /teams/team_id/projects/project_id/tasks/task_id
   - team_id = the teams id.
   - project_id = the project id.
   - task_id = the tasks id.
   - Requires valid token in header.
+
+<br>
+  
 - Edit: PATCH /teams/team_id/projects/project_id/tasks/task_id
   - team_id = the teams id.
   - project_id = the project id.
@@ -190,8 +248,116 @@ Authorization required for most endpoints.
     }
   }
   ```
+
+<br>
+  
 - Delete: DELETE /teams/team_id/projects/project_id/tasks/task_id
   - team_id = the teams id.
   - project_id = the project id.
   - task_id = the tasks id.
   - Requires the token belonging to the team owner in header.
+
+
+### Membership requests
+
+<br>
+
+#### User routes
+
+- Create: POST /users/user_id/requests
+
+  - This is used by a team owner to send a request to a user
+
+  - user_id = the users id
+  - takes params
+  ```
+  {
+    "user": {
+      "team_id": "required, integer team id, team must exist, and you must be the owner"
+    }
+  }
+  ```
+
+<br>
+
+- Index: GET /users/user_id/requests.
+  - user_id = the users id.
+  - Requires valid token in header.
+
+<br>
+
+- Show: GET /users/user_id/requests/request_id
+  - user_id = the users id.
+  - request_id = the requests id.
+  - Requires valid token in header.
+
+<br>
+
+- Delete: DELETE /users/user_id/requests/request_id
+  - user_id = the users id.
+  - request_id = the requests id.
+  - Requires the token belonging to the user in header.
+  - user must be the sender of the request.
+  
+<br>
+
+- Accept: PATCH /users/user_id/requests/request_id/accept
+  - user_id = the users id.
+  - request_id = the requests id.
+  - Requires the token belonging to the user in header.
+  - user must be the recipient of the request.
+  
+<br>
+
+- Reject: PATCH /users/user_id/requests/request_id/reject
+  - user_id = the users id.
+  - request_id = the requests id.
+  - Requires the token belonging to the user in header.
+  - user must be the recipient of the request.
+  
+<br>
+
+#### Team routes
+
+- Create: POST /teams/team_id/requests
+  - This is used by a user to send a request to a team
+  - team_id = the teams id.
+
+<br>
+
+- Index: GET /teams/team_id/requests.
+  - team_id = the teams id.
+  - Requires valid token in header.
+
+<br>
+
+- Show: GET /teams/team_id/requests/request_id
+  - team_id = the teams id.
+  - request_id = the requests id.
+  - Requires valid token in header.
+
+<br>
+
+- Delete: DELETE /teams/team_id/requests/request_id
+  - team_id = the teams id.
+  - request_id = the requests id.
+  - Requires the token belonging to the team owner in header.
+  - team must be the sender of the request.
+
+<br>
+
+- Accept: PATCH /teams/team_id/requests/request_id/accept
+  - team_id = the teams id.
+  - request_id = the requests id.
+  - Requires the token belonging to the team owner in header.
+  - team must be the recipient of the request.
+
+<br>
+
+- Reject: PATCH /teams/team_id/requests/request_id/reject
+  - team_id = the teams id.
+  - request_id = the requests id.
+  - Requires the token belonging to the team owner in header.
+  - team must be the recipient of the request.
+
+<br>
