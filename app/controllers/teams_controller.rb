@@ -1,7 +1,11 @@
 class TeamsController < ApplicationController
   # before_action :correct_user,   only: [:update, :destroy]
   def index
-    render json: Team.all
+    if params[:user_id]
+      render json: current_user.teams
+    else
+      render json: Team.all
+    end
   end
 
   def show

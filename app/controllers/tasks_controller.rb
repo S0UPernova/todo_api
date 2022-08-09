@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_team
   before_action :set_project
-  before_action :correct_user
+  before_action :isMember
+  before_action :correct_user, only: [:create, :update, :destroy]
   before_action :set_task, only: [:show, :update, :destroy]
 
   # GET /tasks

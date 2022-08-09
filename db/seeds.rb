@@ -42,6 +42,11 @@ Team.create(
       user_id: User.second.id,
       name: 'secondTeam',
       description: "secondTeam description"
+    },
+    {
+      user_id: User.first.id,
+      name: 'ThirdTeam',
+      description: "thirdTeam description"
     }
   ]
 )
@@ -65,6 +70,12 @@ Project.create(
       name: 'thirdProjectName',
       description: "project description",
       requirements: "list of requirements, should be a json string"
+    },
+    {
+      team_id: Team.third.id,
+      name: 'fourthProjectName',
+      description: "project description",
+      requirements: "list of requirements, should be a json string"
     }
   ]
 )
@@ -74,22 +85,34 @@ Task.create(
     {
       project_id: Project.first.id,
       name: 'taskName',
-      description: "task description"
+      description: "task description",
+      duedate: 1.day.ago
     },
     {
       project_id: Project.first.id,
       name: 'secondTaskName',
-      description: "second task description"
+      description: "second task description",
+      duedate: 1.month
     },
     {
       project_id: Project.second.id,
       name: 'thirdTaskName',
-      description: "Third task description"
+      description: "Third task description",
+      duedate: 1.day
+    },
+    {
+    project_id: Project.second.id,
+      name: 'completedTaskName',
+      description: "Completed task description",
+      duedate: 1.day,
+      completed: true,
+      completed_at: 1.day.ago
     },
     {
         project_id: Project.third.id,
         name: 'fourthTaskName',
-        description: "second task description"
+        description: "second task description",
+        duedate: 2.day
     }
   ]
 )
@@ -98,12 +121,12 @@ TeamsRelationship.create(
   [
     {
       user_id: User.second.id,
-      team_id: Team.second.id
+      team_id: Team.third.id
     },
     {
       user_id: User.first.id,
-      team_id: Team.first.id
-    }
+      team_id: Team.second.id
+    },
   ]
 )
 

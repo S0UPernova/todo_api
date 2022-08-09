@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :get_team
-  before_action :correct_user
+  before_action :isAdmin, only: [:create, :update, :destroy]
+  before_action :isMember
   before_action :set_project, only: [:show, :update, :destroy]
 
   def index
@@ -51,7 +52,7 @@ class ProjectsController < ApplicationController
     end
 
     # TODO add logic for admins
-    def correct_user
+    def isAdmin
       begin
         return false unless @team
         return false unless current_user

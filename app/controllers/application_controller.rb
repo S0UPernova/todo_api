@@ -25,7 +25,20 @@ class ApplicationController < ActionController::API
       # response.headers['Content-Type'] = 'application/json; charset=utf-8'
     end
   end
-
+  def isMember
+    begin
+      return false unless @team
+      return false unless current_user
+      if @team.user_id == current_user.id || @team.members.exists?(current_user.id)
+        return true
+      else
+        head :forbidden
+        return false
+      end
+    end
+    head :forbidden
+    false
+  end
   private
     
   def valid_token(token)
