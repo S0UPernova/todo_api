@@ -37,7 +37,7 @@ class ApplicationController < ActionController::API
       end
     end
     head :forbidden
-    false
+    return false
   end
   private
     

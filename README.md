@@ -21,8 +21,16 @@ Authorization required for most endpoints.
 <br>
 
 ### Token
-- New token: GET /key/new
-
+- New token: POST /token/new
+  - takes params
+    ```
+    {
+      "user": {
+        "email": "required, limit 255 characters",
+        "password": "required, limit 140 characters"
+      }
+    }
+    ```
 <br>
 
 ### Users

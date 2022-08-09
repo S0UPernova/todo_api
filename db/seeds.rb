@@ -47,7 +47,12 @@ Team.create(
       user_id: User.first.id,
       name: 'ThirdTeam',
       description: "thirdTeam description"
-    }
+    },
+    {
+      user_id: User.second.id,
+      name: 'fourthTeam',
+      description: "fourthTeam description"
+    },
   ]
 )
 

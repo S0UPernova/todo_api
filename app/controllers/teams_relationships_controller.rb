@@ -6,10 +6,13 @@ class TeamsRelationshipsController < ApplicationController
   def index
     @members = @team.members unless !@team
     if @team
-      if isMember(@team)
+      if isMember
         render json: @members
       else
-        render json: {"error": "not a member"}, status: :forbidden
+        head :forbidden
+        message = {"error": "not a member"}
+        response.body = message.to_json
+        return
       end
     elsif params[:user_id].to_i == current_user.id
       user = User.find(params[:user_id])
@@ -21,14 +24,15 @@ class TeamsRelationshipsController < ApplicationController
   end
 
   def show
-    if isMember(@team) && @team.id == @membership.team_id
+    if isMember && @team.id == @membership.team_id
       render json: @membership, status: :ok
     elsif @membership.user_id == current_user.id\
           && params[:user_id].to_i == current_user.id
 
       render json: @membership, status: :ok
     else
-      render json: @membership, status: :forbidden
+      head :forbidden
+      return
     end
   end
   
