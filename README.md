@@ -266,9 +266,56 @@ Authorization required for most endpoints.
   - Requires the token belonging to the team owner in header.
 
 
-### Membership requests
+### Memberships / members
+
 
 <br>
+
+#### User routes
+
+- Index: GET /users/user_id/memberships.
+  - user_id = the users id.
+  - Requires valid token belonging to the user in header.
+
+<br>
+
+- Show: GET /users/user_id/requests/membership_id
+  - user_id = the users id.
+  - membership_id = the membership id.
+  - Requires valid token belonging to the user in header.
+
+<br>
+
+- Delete: DELETE /users/user_id/members/membership_id
+  - user_id = the users id.
+  - membership_id = the memberships id.
+  - Requires valid token belonging to the user in header.
+
+<br>
+
+#### Team routes
+
+- Index: GET /teams/team_id/members.
+  - team_id = the teams id.
+  - Requires valid token in header.
+
+<br>
+
+- Show: GET /teams/team_id/members/membership_id
+  - team_id = the teams id.
+  - membership_id = the memberships id.
+  - Requires valid token in header.
+
+<br>
+
+- Delete: DELETE /teams/team_id/members/membership_id
+  - team_id = the teams id.
+  - membership_id = the membership id.
+  - Requires the token belonging to the team owner in header.
+
+<br>
+
+### Membership requests
 
 #### User routes
 
