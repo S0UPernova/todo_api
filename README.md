@@ -1,6 +1,41 @@
 # Todo API
 
+## Getting started
+
 <br>
+
+### Basics
+
+<br>
+
+```bash
+$ bundle install
+```
+
+```bash
+$ rails db:migrate
+```
+*Optional*
+```bash
+$ rails db:seed
+```
+
+
+### Environment variables
+
+<br>
+
+optionally you can use
+
+*config/local_env.yml*
+```
+HMAC_SECRET: theSecretYouChoose
+```
+
+<br>
+<hr>
+<br>
+
 
 ## Headers
 <br>
@@ -14,7 +49,8 @@ Authorization required for most endpoints.
 --header 'Authorization: token'
 ```
 
----
+<br>
+<hr>
 <br>
 
 ## Endponts
