@@ -353,6 +353,8 @@ Authorization required for most endpoints.
 
 ### Membership requests
 
+<br>
+
 #### User routes
 
 - Create: POST /users/user_id/requests
