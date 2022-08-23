@@ -62,25 +62,25 @@ Project.create(
       team_id: Team.first.id,
       name: 'firstProjectName',
       description: "project description",
-      requirements: "list of requirements, should be a json string"
+      # requirements: "list of requirements, should be a json string"
     },
     {
       team_id: Team.first.id,
       name: 'secondProjectName',
       description: "project description",
-      requirements: "list of requirements, should be a json string"
+      # requirements: "list of requirements, should be a json string"
     },
     {
       team_id: Team.second.id,
       name: 'thirdProjectName',
       description: "project description",
-      requirements: "list of requirements, should be a json string"
+      # requirements: "list of requirements, should be a json string"
     },
     {
       team_id: Team.third.id,
       name: 'fourthProjectName',
       description: "project description",
-      requirements: "list of requirements, should be a json string"
+      # requirements: "list of requirements, should be a json string"
     }
   ]
 )
