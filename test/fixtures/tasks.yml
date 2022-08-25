@@ -16,4 +16,4 @@ team_one_task_two:
 team_two_task_one:
   name: project_one
   description: MyText
-  project: team_one_project_two
+  project: team_two_project_one

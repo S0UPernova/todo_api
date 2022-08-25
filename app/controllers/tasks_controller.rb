@@ -60,7 +60,8 @@ class TasksController < ApplicationController
 
     def correct_user
       begin
-        if @team.id == @project.team_id and @team.user_id == current_user.id
+        if @team.id == @project.team_id and @team.user_id == current_user.id\
+          || @team.id == @project.team_id and isMember
           return true
         else
           head :forbidden
