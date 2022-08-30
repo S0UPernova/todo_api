@@ -7,6 +7,10 @@ class TeamsController < ApplicationController
       render json: Team.all
     end
   end
+  
+  def discover
+    render json: Team.where.not(user_id: current_user.id).excluding(current_user.memberships)
+  end
 
   def show
     team = Team.find(params[:id])

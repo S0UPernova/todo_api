@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/teams/discover', to: 'teams#discover'
   resources :teams, only: [:show, :index, :create, :update, :destroy] do
     resources :projects, only: [:show, :index, :create, :update, :destroy] do
       resources :tasks, only: [:show, :index, :create, :update, :destroy]

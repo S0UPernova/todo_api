@@ -6,6 +6,7 @@ class MembershipRequestIndexTest < ActionDispatch::IntegrationTest
     @second_user = users(:archer)
     @first_team = teams(:team_one)
     @second_team = teams(:team_two)
+    @team_request = team_requests(:one)
   end
   
   
@@ -16,7 +17,7 @@ class MembershipRequestIndexTest < ActionDispatch::IntegrationTest
       headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
     assert_response :success
     assert_equal 'application/json', response.content_type
-    assert_equal [@second_team].to_json, response.body
+    assert_equal [@team_request].to_json, response.body
   end
 
   test "should not get index for another user" do
@@ -48,7 +49,7 @@ class MembershipRequestIndexTest < ActionDispatch::IntegrationTest
       headers: { 'Authorization' => "#{User.new_token(@second_user)}" }, as: :json
     assert_response :success
     assert_equal 'application/json', response.content_type
-    assert_equal [@first_user].to_json, response.body
+    assert_equal [@team_request].to_json, response.body
   end
 
   test "should not get index for another team" do

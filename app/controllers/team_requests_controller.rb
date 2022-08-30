@@ -5,9 +5,11 @@ class TeamRequestsController < ApplicationController
 
   def index
     if @user == current_user
-      render json: @user.requests
+      # render json: @user.requests
+      render json: TeamRequest.where({user_id: current_user.id})
     elsif @team && @team.user_id == current_user.id
-      render json: @team.requests
+      # render json: @team.requests
+      render json: TeamRequest.where({team_id: @team.id})
     else
       head :forbidden
     end
@@ -81,8 +83,9 @@ class TeamRequestsController < ApplicationController
       @team_request.update!(accepted: true)
       @create_new_relationship = TeamsRelationshipsController.new
       @create_new_relationship.create(@team_request)
-      @relationship = TeamsRelationship.find_by(user_id: @team_request.user_id)
+      @relationship = TeamsRelationship.find_by(user_id: @team_request.user_id, team_id: @team_request.team_id)
       if @relationship
+        
         render json: {'relationship': @relationship},
         status: :created,
         location: team_teams_relationship_url(@team_request.user_id, @relationship)

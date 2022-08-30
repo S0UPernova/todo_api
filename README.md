@@ -148,6 +148,11 @@ Authorization required for most endpoints.
 
 <br>
 
+- Discover: GET /teams/discover
+  - Requires valid token in header.
+  
+<br>
+
 - Show: GET /teams/team_id
   - team_id = the teams id.
   - Requires valid token in header.
@@ -365,7 +370,7 @@ Authorization required for most endpoints.
   - takes params
   ```
   {
-    "user": {
+    "team": {
       "team_id": "required, integer team id, team must exist, and you must be the owner"
     }
   }
