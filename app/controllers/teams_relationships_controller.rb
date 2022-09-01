@@ -4,10 +4,11 @@ class TeamsRelationshipsController < ApplicationController
   
   
   def index
-    @members = @team.members unless !@team
+    # @members = @team.members unless !@team
+    relationships = TeamsRelationship.where({team_id: @team.id}) unless !@team
     if @team
       if isMember
-        render json: @members
+        render json: relationships
       else
         head :forbidden
         message = {"error": "not a member"}
@@ -16,7 +17,9 @@ class TeamsRelationshipsController < ApplicationController
       end
     elsif params[:user_id].to_i == current_user.id
       user = User.find(params[:user_id])
-      render json: current_user.memberships
+      relationships = TeamsRelationship.where({user_id: user.id})
+      # render json: current_user.memberships
+      render json: relationships
     else
       render json: {"error": "you cannot view another users memberships"},
         status: :forbidden
