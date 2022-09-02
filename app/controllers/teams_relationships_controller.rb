@@ -5,10 +5,10 @@ class TeamsRelationshipsController < ApplicationController
   
   def index
     # @members = @team.members unless !@team
-    relationships = TeamsRelationship.where({team_id: @team.id}) unless !@team
+    @relationships = TeamsRelationship.where({team_id: @team.id}) unless !@team
     if @team
       if isMember
-        render json: relationships
+        render json: @relationships
       else
         head :forbidden
         message = {"error": "not a member"}
@@ -17,9 +17,9 @@ class TeamsRelationshipsController < ApplicationController
       end
     elsif params[:user_id].to_i == current_user.id
       user = User.find(params[:user_id])
-      relationships = TeamsRelationship.where({user_id: user.id})
+      @relationships = TeamsRelationship.where({user_id: user.id})
       # render json: current_user.memberships
-      render json: relationships
+      render json: @relationships
     else
       render json: {"error": "you cannot view another users memberships"},
         status: :forbidden
@@ -45,12 +45,12 @@ class TeamsRelationshipsController < ApplicationController
   # so this works for now, although is definitely not a best practice
   def create(team_request)
     begin
-      @relationship = TeamsRelationship.find_by(user_id: team_request.team_id, user_id: team_request.team_id)
+      relationship = TeamsRelationship.where(user_id: team_request.team_id, user_id: team_request.team_id)
         @team_relationship = TeamsRelationship.new(
           user_id: team_request.user_id,
           team_id: team_request.team_id
         )
-        @team_relationship.save! unless @relationship
+        @team_relationship.save! unless relationship
     rescue SQLite3::ConstraintException, ActiveRecord::RecordNotUnique
       render :unprocessable_entity
     end
