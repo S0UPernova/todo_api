@@ -45,12 +45,12 @@ class TeamsRelationshipsController < ApplicationController
   # so this works for now, although is definitely not a best practice
   def create(team_request)
     begin
-      relationship = TeamsRelationship.where(user_id: team_request.team_id, user_id: team_request.team_id)
-        @team_relationship = TeamsRelationship.new(
-          user_id: team_request.user_id,
-          team_id: team_request.team_id
-        )
-        @team_relationship.save! unless relationship
+      relationship = TeamsRelationship.find_by(user_id: team_request.user_id, team_id: team_request.team_id)
+      @team_relationship = TeamsRelationship.new(
+        user_id: team_request.user_id,
+        team_id: team_request.team_id
+      )
+      @team_relationship.save! unless relationship
     rescue SQLite3::ConstraintException, ActiveRecord::RecordNotUnique
       render :unprocessable_entity
     end

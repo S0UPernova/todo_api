@@ -16,10 +16,12 @@ class MembershipRequestRejectTest < ActionDispatch::IntegrationTest
   
   test "should reject request as user if team is sender" do
     assert_no_difference('TeamsRelationship.count') do
-      patch user_team_request_reject_url(@third_user, @fourth_team_request),
-        headers: { 'Authorization' => "#{User.new_token(@third_user)}" }, as: :json
+      assert_difference('TeamRequest.count', -1) do
+        patch user_team_request_reject_url(@third_user, @fourth_team_request),
+          headers: { 'Authorization' => "#{User.new_token(@third_user)}" }, as: :json
+      end
     end
-    assert_equal false, @fourth_team_request.reload.accepted
+    # assert_equal false, @fourth_team_request.reload.accepted
     assert_equal 'application/json', response.content_type
     assert_response :success
   end
@@ -68,11 +70,14 @@ class MembershipRequestRejectTest < ActionDispatch::IntegrationTest
   
   test "should reject request when as team if user is sender" do
     assert_no_difference('TeamsRelationship.count') do
-      patch team_team_request_reject_url(@third_team, @third_team_request),
-        headers: { 'Authorization' => "#{User.new_token(@second_user)}" }, as: :json
+      assert_difference('TeamRequest.count', -1) do
+        patch team_team_request_reject_url(@third_team, @third_team_request),
+          headers: { 'Authorization' => "#{User.new_token(@second_user)}" }, as: :json
+      end
     end
 
-    assert_equal false, @third_team_request.reload.accepted
+    # assert_equal false, @third_team_request.reload.accepted
+    # assert_not @third_team_request.reload
     assert_equal 'application/json', response.content_type
     assert_response :success
   end

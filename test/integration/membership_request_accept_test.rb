@@ -16,11 +16,18 @@ class MembershipRequestAcceptTest < ActionDispatch::IntegrationTest
   
   test "should accept request as user if team is sender" do
     assert_difference('TeamsRelationship.count', 1) do
-      patch user_team_request_accept_url(@third_user, @fourth_team_request),
-        headers: { 'Authorization' => "#{User.new_token(@third_user)}" }, as: :json
+      assert_difference('TeamRequest.count', -1) do
+        patch user_team_request_accept_url(@third_user, @fourth_team_request),
+          headers: { 'Authorization' => "#{User.new_token(@third_user)}" }, as: :json
+      end
     end
+    # should not create one if it already exists
+    # assert_no_difference('TeamsRelationship.count') do
+    #   patch user_team_request_accept_url(@third_user, @fourth_team_request),
+    #     headers: { 'Authorization' => "#{User.new_token(@third_user)}" }, as: :json
+    # end
 
-    assert_equal true, @fourth_team_request.reload.accepted
+    # assert_equal true, @fourth_team_request.reload.accepted
     assert_equal 'application/json', response.content_type
     assert_response :created
   end
@@ -69,11 +76,18 @@ class MembershipRequestAcceptTest < ActionDispatch::IntegrationTest
   
   test "should accept request when as team if user is sender" do
     assert_difference('TeamsRelationship.count', 1) do
-      patch team_team_request_accept_url(@third_team, @third_team_request),
+      assert_difference('TeamRequest.count', -1) do        
+        patch team_team_request_accept_url(@third_team, @third_team_request),
         headers: { 'Authorization' => "#{User.new_token(@second_user)}" }, as: :json
+      end
     end
+    # should not create one if it already exists
+    # assert_no_difference('TeamsRelationship.count') do
+    #   patch team_team_request_accept_url(@third_team, @third_team_request),
+    #     headers: { 'Authorization' => "#{User.new_token(@second_user)}" }, as: :json
+    # end
 
-    assert_equal true, @third_team_request.reload.accepted
+    # assert_equal true, @third_team_request.reload.accepted
     assert_equal 'application/json', response.content_type
     assert_response :created
   end

@@ -80,11 +80,12 @@ class TeamRequestsController < ApplicationController
       && @user.id == current_user.id\
       && @team_request.from_team == true
 
-      @team_request.update!(accepted: true)
       @create_new_relationship = TeamsRelationshipsController.new
       @create_new_relationship.create(@team_request)
       @relationship = TeamsRelationship.find_by(user_id: @team_request.user_id, team_id: @team_request.team_id)
       if @relationship
+        # @team_request.update!(accepted: true)
+        @team_request.delete
         
         render json: {'relationship': @relationship},
         status: :created,
@@ -109,7 +110,8 @@ class TeamRequestsController < ApplicationController
       && @user.id == current_user.id\
       && @team_request.from_team == true
       
-      @team_request.update!(accepted: false)
+      # @team_request.update!(accepted: false)
+      @team_request.delete
       render json: @team_request
     else
       head :forbidden
