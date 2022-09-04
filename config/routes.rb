@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post '/token/new', to: 'sessions#create'
+  post '/login', to: 'sessions#create'
   resources :users, only: [:index, :show, :update, :create,:destroy] do
     resources :teams, only: [:show, :index, :create, :update, :destroy] do
       resources :projects, only: [:show, :index, :create, :update, :destroy] do

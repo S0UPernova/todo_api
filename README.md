@@ -57,7 +57,7 @@ Authorization required for most endpoints.
 <br>
 
 ### Token
-- New token: POST /token/new
+- New token: POST /login
   - takes params
     ```
     {
