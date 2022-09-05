@@ -1,7 +1,12 @@
 class User < ApplicationRecord
+  extend ActiveModel::Callbacks
+  define_model_callbacks :resend_activation_email
+  before_resend_activation_email :create_activation_digest
   # TODO make teams tansferable
   has_many :teams, dependent: :destroy
+  attr_accessor :activation_token
   before_save   :downcase_email
+  before_create :create_activation_digest
   validates :handle, presence: true, length: { maximum: 50}
   validates :name, presence: true, length: { maximum: 50}
   has_many :teams_relationships, dependent: :destroy
@@ -23,6 +28,8 @@ class User < ApplicationRecord
                                                     BCrypt::Engine.cost
       BCrypt::Password.create(string, cost: cost)
     end
+
+    # Returns JWT for user
     def new_token(user)
       exp = Time.now.to_i + 1.day
       @payload = {
@@ -33,6 +40,35 @@ class User < ApplicationRecord
       }
       return JWT.encode @payload, ENV['HMAC_SECRET'], 'HS256'
     end
+
+    # Returns random token for activation
+    def random_token
+      SecureRandom.urlsafe_base64
+    end
+
+  end
+  
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+  # Activates an account.
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  # Sends activation email
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  # Resends activation email, though there is probably a better way of doing it
+  def resend_activation_email
+    self.create_activation_digest
+    self.save
+    self.reload
+    UserMailer.account_activation(self).deliver_now
   end
 
 
@@ -49,15 +85,7 @@ class User < ApplicationRecord
   #   update_attribute(:remember_digest, nil)
   # end
 
-  # Activates an account.
-  # def activate
-  #   update_columns(activated: true, activated_at: Time.zone.now)
-  # end
-
-  # Sends activation email
-  # def send_activation_email
-  #   UserMailer.account_activation(self).deliver_now
-  # end
+  
   
   # Sets the password reset attributes
   # def create_reset_digest
@@ -83,8 +111,8 @@ class User < ApplicationRecord
     email.downcase!
   end
 
-  # def create_activation_digest
-  #   self.activation_token = User.new_token
-  #   self.activation_digest = User.digest(activation_token)
-  # end
+  def create_activation_digest
+    self.activation_token = User.random_token
+    self.activation_digest = User.digest(activation_token)
+  end
 end

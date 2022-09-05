@@ -29,7 +29,19 @@ optionally you can use
 
 *config/local_env.yml*
 ```
-HMAC_SECRET: theSecretYouChoose
+HMAC_SECRET:        theSecretYouChoose
+SENDGRID_API_KEY:   theKeyToTheAPI
+SENDGRID_EMAIL:     YourSendgridSenderEmail
+URL:                http://localhost:3000 // the full url
+HOST:               localhost:3000 // could be your app on heroku
+DOMAIN:             localhost:3000 // could be heroku.com
+APP_NAME:           theName
+ORIGIN:             corsOrigin
+```
+
+### You should now be able to run it with
+```
+$ rails server
 ```
 
 <br>

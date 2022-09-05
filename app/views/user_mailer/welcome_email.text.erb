@@ -1,7 +1,7 @@
-Welcome to example.com, <%= @user.name %>
+Welcome to <%= ENV['APP_NAME'] %>, <%= @user.name %>
 ===============================================
 
-You have successfully signed up to <%= ENV['DOMAIN'] %>,
+You have successfully signed up to <%= ENV['APP_NAME'] %>,
 your username is: <%= @user.handle %>.
 
 To login to the site, just follow this link: <%= @url %>.

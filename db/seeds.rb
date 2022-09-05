@@ -12,21 +12,27 @@ User.create!(
       handle: "the first",
       email: "user@example.com",
       password: 'foobar',
-      password_confirmation: "foobar"
+      password_confirmation: "foobar",
+      activated: true,
+      activated_at: Time.zone.now
   },
     {
       name: 'secondUser',
       handle: "the second",
       email: "example@example.com",
       password: 'foobar',
-      password_confirmation: "foobar"
+      password_confirmation: "foobar",
+      activated: true,
+      activated_at: Time.zone.now
     },
     {
       name: 'thirdUser',
       handle: "the third",
       email: "thr33@example.com",
       password: 'foobar',
-      password_confirmation: "foobar"
+      password_confirmation: "foobar",
+      activated: true,
+      activated_at: Time.zone.now
     }
   ]
 )

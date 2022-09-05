@@ -64,7 +64,7 @@ Rails.application.configure do
 
   # Configuration for mailers
   config.action_mailer.delivery_method = :smtp
-  host = ENV['DOMAIN']
+  host = ENV['HOST']
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
@@ -72,7 +72,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => 'apikey',
     :password       => ENV['SENDGRID_API_KEY'],
-    :domain         => 'heroku.com',
+    :domain         => ENV['DOMAIN'],
     :enable_starttls_auto => true
   }
   

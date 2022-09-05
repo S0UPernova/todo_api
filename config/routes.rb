@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   post '/login', to: 'sessions#create'
-  resources :users, only: [:index, :show, :update, :create,:destroy] do
+  resources :users, only: [:index, :show, :update, :create,:destroy, :resend_activation_email] do
+    patch :resend_activation_email, only: [:edit], path: "resend"
     resources :teams, only: [:show, :index, :create, :update, :destroy] do
       resources :projects, only: [:show, :index, :create, :update, :destroy] do
         resources :tasks, only: [:show, :index, :create, :update, :destroy]
@@ -30,4 +31,7 @@ Rails.application.routes.draw do
       patch :reject
     end
   end
+
+  resources :account_activations, only: [:edit]
+
 end
