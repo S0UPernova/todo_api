@@ -65,7 +65,7 @@ class User < ApplicationRecord
 
   # Resends activation email, though there is probably a better way of doing it
   def resend_activation_email
-    self.create_activation_digest
+    # self.create_activation_digest
     self.save
     self.reload
     UserMailer.account_activation(self).deliver_now

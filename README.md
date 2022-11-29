@@ -116,6 +116,7 @@ Authorization required for most endpoints.
   - ID = the users id.
   - Requires the token belonging to the user in header.
   - takes some or all of these params.
+  - password, password_confirmation, and current_password fields are required to update password
 
   ```
   {
@@ -124,7 +125,8 @@ Authorization required for most endpoints.
       "name": "userName",
       "email": "user@example.com",
       "password": "foobar",
-      "password_confirmation": "foobar"
+      "password_confirmation": "foobar",
+      "current_password": "barfoo"
     }
   }
   ```

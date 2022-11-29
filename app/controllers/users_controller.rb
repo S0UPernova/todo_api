@@ -27,16 +27,32 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if correct_user
-      if user.update(user_params)
-        render json: user
+      if user_params[:password]
+        if user_params[:password] == user_params[:password_confirmation]\
+          && user&.authenticate(params[:user][:current_password])
+          if user.update(user_params)
+            render json: user
+          else
+            render json: user.errors, status: :unprocessable_entity
+          end
+        else
+          render json: user.errors, status: :unauthorized
+        end
+      elsif !user_params[:password] && !user_params[:password_confirmation]
+        if user.update(user_params)
+          render json: user
+        else
+          render json: user.errors, status: :unprocessable_entity
+        end
       else
-        render json: user.errors, status: :unprocessable_entity
+        render json: user.errors, status: :unauthorized
       end
     else
       head :forbidden
     end
   end
 
+  # todo make this require password
   def destroy
     User.find(params[:id]).destroy
     render status: :no_content
