@@ -27,17 +27,26 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if correct_user
-      if user_params[:password]
-        if user_params[:password] == user_params[:password_confirmation]\
-          && user&.authenticate(params[:user][:current_password])
-          if user.update(user_params)
-            render json: user
+      
+      if user_params[:password] || user_params[:password_confirmation]
+        if user_params[:password] == user_params[:password_confirmation]
+          if user&.authenticate(params[:user][:current_password])
+            if user.update(user_params)
+              render json: user
+            else
+              render json: user.errors, status: :unprocessable_entity
+            end
           else
-            render json: user.errors, status: :unprocessable_entity
+            if params[:user][:current_password]
+              render json: {password: 'current password you entered does not seem right'}, status: :unauthorized
+            else
+              render json: {password: 'current password required'}, status: :unauthorized
+            end
           end
         else
-          render json: user.errors, status: :unauthorized
+          render json: {password: 'password and confirmation must match'}, status: :unauthorized
         end
+
       elsif !user_params[:password] && !user_params[:password_confirmation]
         if user.update(user_params)
           render json: user
@@ -45,8 +54,9 @@ class UsersController < ApplicationController
           render json: user.errors, status: :unprocessable_entity
         end
       else
-        render json: user.errors, status: :unauthorized
+        render json: {password: 'new password required'}, status: :unauthorized
       end
+
     else
       head :forbidden
     end
