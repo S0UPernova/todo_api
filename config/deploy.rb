@@ -1,12 +1,62 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "todo_api"
-set :repo_url, "git@github.com:S0UPernova/todo_api.git"
+# set :application, "todo_api"
+# set :repo_url, "git@github.com:S0UPernova/todo_api.git"
 # Also works with non-github repos, I roll my own gitolite server
-set :deploy_to, "/home/ubuntu/#{fetch :application}"
+# set :deploy_to, "/home/ubuntu/#{fetch :application}"
+# set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
+# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+
+
+
+
+
+
+# require 'rbenv/capistrano'
+# require 'bundler/capistrano'
+
+set :rbenv_type, :user
+
+set :application, "52.9.219.7"
+set :domain, '52.9.219.7'
+
 set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+# Roles
+# role :web, domain
+# role :app, domain
+# role :db,  domain, :primary => true
+
+#deployment details
+set :deploy_via, :remote_cache
+set :user, "ubuntu"
+set :copy_compression, :bz2
+set :git_shallow_clone, 1
+set :scm_verbose, true
+set :use_sudo, false
+set :deploy_to, "/home/ubuntu/#{fetch :application}"
+
+
+
+# default_run_options[:pty] = true
+set :ssh_options, {:forward_agent => true}
+set :ssh_options, {:auth_methods => "publickey"}
+set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
+
+#repo details
+set :scm, :git
+set :repository,  "git@github.com:S0UPernova/todo_api.git"
+set :repo_url, "git@github.com:S0UPernova/todo_api.git"
+
+set :scm_username, 'S0UPernova'
+set :keep_releases, 2
+# set :branch, "master"
+
+
+
+
+
 # append :linked_files, 'config/database.yml', 'config/master.key'
 
 # Default branch is :master

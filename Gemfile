@@ -39,7 +39,10 @@ gem 'crass', '1.0.6'
 gem 'railties', '6.1.4.4'
 gem 'sprockets', '4.0.2'
 gem 'sprockets-rails', '3.4.2'
-
+gem 'rspec'
+gem 'faker'
+gem 'rake'
+gem 'activerecord'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
