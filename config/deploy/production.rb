@@ -61,4 +61,4 @@
 #   }
 
 server 'ec2-52-9-219-7.us-west-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{app db web}
-
+set :branch, "main"
