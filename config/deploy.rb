@@ -7,7 +7,7 @@ set :repo_url, "git@github.com:S0UPernova/todo_api.git"
 set :deploy_to, "/home/ubuntu/#{fetch :application}"
 set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
-
+# append :linked_files, 'config/database.yml', 'config/master.key'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
