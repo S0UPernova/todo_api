@@ -191,6 +191,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-rbenv
+  concurrent-ruby (~> 1.0, >= 1.0.2)
   jwt (~> 2.3)
   listen (~> 3.3)
   puma (~> 5.0)
