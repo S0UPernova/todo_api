@@ -28,21 +28,21 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt', '~> 2.3'
 
 
-# deployment stuff
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-gem 'websocket-extensions', '0.1.5'
-# gem 'loofah', '1.13.0'
-gem 'loofah', '~> 2.19'
-gem 'racc', '1.6.0'
-gem 'crass', '1.0.6'
-gem 'railties', '6.1.4.4'
-gem 'sprockets', '4.0.2'
-gem 'sprockets-rails', '3.4.2'
-gem 'rspec'
-gem 'faker'
-gem 'rake'
-gem 'activerecord'
+# # deployment stuff
+# gem 'ed25519', '>= 1.2', '< 2.0'
+# gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+# gem 'websocket-extensions', '0.1.5'
+# # gem 'loofah', '1.13.0'
+# gem 'loofah', '~> 2.19'
+# gem 'racc', '1.6.0'
+# gem 'crass', '1.0.6'
+# gem 'railties', '6.1.4.4'
+# gem 'sprockets', '4.0.2'
+# gem 'sprockets-rails', '3.4.2'
+# gem 'rspec'
+# gem 'faker'
+# gem 'rake'
+# gem 'activerecord'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
