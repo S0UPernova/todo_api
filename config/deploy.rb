@@ -18,8 +18,8 @@ lock "~> 3.17.1"
 
 set :rbenv_type, :user
 
-set :application, "52.9.219.7"
-set :domain, '52.9.219.7'
+set :application, "todo_api"
+set :domain, 'https://ec2-52-9-219-7.us-west-1.compute.amazonaws.com/'
 
 set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
