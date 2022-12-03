@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "todo_app"
+set :application, "todo_api"
 set :repo_url, "git@github.com:S0UPernova/todo_api.git"
 # Also works with non-github repos, I roll my own gitolite server
 set :deploy_to, "/home/ubuntu/#{fetch :application}"

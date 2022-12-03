@@ -190,9 +190,12 @@ DEPENDENCIES
   puma (~> 5.0)
   racc (= 1.6.0)
   rack-cors
-  rails (~> 6.1.4, >= 6.1.4.4)
+  rails (= 6.1.4.4)
+  railties (= 6.1.4.4)
   spring
-  sqlite3 (~> 1.4)
+  sprockets (= 4.0.2)
+  sprockets-rails (= 3.4.2)
+  sqlite3 (= 1.4.2)
   tzinfo-data
   websocket-extensions (= 0.1.5)
 
