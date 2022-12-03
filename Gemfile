@@ -4,9 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '6.1.4.4'
+gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.4.2'
+gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -27,22 +27,6 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'jwt', '~> 2.3'
 
-
-# # deployment stuff
-# gem 'ed25519', '>= 1.2', '< 2.0'
-# gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-# gem 'websocket-extensions', '0.1.5'
-# # gem 'loofah', '1.13.0'
-# gem 'loofah', '~> 2.19'
-# gem 'racc', '1.6.0'
-# gem 'crass', '1.0.6'
-# gem 'railties', '6.1.4.4'
-# gem 'sprockets', '4.0.2'
-# gem 'sprockets-rails', '3.4.2'
-# gem 'rspec'
-# gem 'faker'
-# gem 'rake'
-# gem 'activerecord'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
