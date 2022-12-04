@@ -22,14 +22,16 @@ set :application, "todo_api"
 set :domain, 'https://ec2-52-9-219-7.us-west-1.compute.amazonaws.com/'
 
 set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 # Roles
 # role :web, domain
 # role :app, domain
 # role :db,  domain, :primary => true
 
 #deployment details
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :user, "ubuntu"
 set :copy_compression, :bz2
 set :git_shallow_clone, 1
@@ -46,7 +48,7 @@ set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
 
 #repo details
 set :scm, :git
-# set :repository,  "git@github.com:S0UPernova/todo_api.git"
+set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
 
 set :scm_username, 'S0UPernova'
