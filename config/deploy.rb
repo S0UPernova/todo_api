@@ -37,7 +37,7 @@ set :scm_verbose, true
 set :use_sudo, false
 set :deploy_to, "/home/ubuntu/#{fetch :application}"
 
-set :asset_roles, []
+# set :asset_roles, []
 
 # default_run_options[:pty] = true
 set :ssh_options, {:forward_agent => true}
@@ -46,7 +46,7 @@ set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
 
 #repo details
 set :scm, :git
-set :repository,  "git@github.com:S0UPernova/todo_api.git"
+# set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
 
 set :scm_username, 'S0UPernova'
