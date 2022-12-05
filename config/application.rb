@@ -37,7 +37,7 @@ module ToDoApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.assets.enabled = false
+    # config.assets.enabled = false
 
     
     config.before_configuration do
