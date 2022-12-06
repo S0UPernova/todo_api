@@ -19,7 +19,7 @@ lock "~> 3.17.1"
 set :rbenv_type, :user
 
 set :application, "todo_api"
-set :domain, 'https://ec2-52-9-219-7.us-west-1.compute.amazonaws.com/'
+set :domain, 'http://ec2-52-9-219-7.us-west-1.compute.amazonaws.com/'
 
 set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
 # set :linked_files, %w{config/database.yml}
@@ -31,12 +31,12 @@ set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistra
 # role :db,  domain, :primary => true
 
 #deployment details
-set :deploy_via, :copy
+# set :deploy_via, :copy
 set :user, "ubuntu"
-set :copy_compression, :bz2
-set :git_shallow_clone, 1
+# set :copy_compression, :bz2
+# set :git_shallow_clone, 1
 set :scm_verbose, true
-set :use_sudo, false
+# set :use_sudo, false
 set :deploy_to, "/home/ubuntu/#{fetch :application}"
 
 # set :asset_roles, []
@@ -47,7 +47,7 @@ set :ssh_options, {:auth_methods => "publickey"}
 set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
 
 #repo details
-set :scm, :git
+# set :scm, :git
 set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
 
