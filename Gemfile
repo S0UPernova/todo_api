@@ -25,7 +25,6 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'jwt', '~> 2.3'
 
-# deployment stuff
 group :production do
   gem 'pg', '~> 1.4', '>= 1.4.5'
 end

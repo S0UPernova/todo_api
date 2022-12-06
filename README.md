@@ -53,9 +53,12 @@ $ rails server
 <br>
 
 Content-Type always required.
+Accept is for the root route, for docs be be able to be seen in html, should not effect responses from other routes
 ```
 --header 'Content-Type: application/json'
 ```
+--header 'Accept: application/json'
+``` 
 Authorization required for most endpoints.
 ```
 --header 'Authorization: token'
