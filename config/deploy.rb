@@ -31,12 +31,12 @@ set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistra
 # role :db,  domain, :primary => true
 
 #deployment details
-# set :deploy_via, :copy
+set :deploy_via, :copy
 set :user, "ubuntu"
-# set :copy_compression, :bz2
-# set :git_shallow_clone, 1
+set :copy_compression, :bz2
+set :git_shallow_clone, 1
 set :scm_verbose, true
-# set :use_sudo, false
+set :use_sudo, false
 set :deploy_to, "/home/ubuntu/#{fetch :application}"
 
 # set :asset_roles, []
@@ -51,7 +51,7 @@ set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
 set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
 
-set :scm_username, 'S0UPernova'
+# set :scm_username, 'S0UPernova'
 set :keep_releases, 2
 # set :branch, "master"
 
