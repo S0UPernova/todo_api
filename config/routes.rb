@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  root 'home#index'
+  # todo add root route to docs
   post '/login', to: 'sessions#create'
   resources :users, only: [:index, :show, :update, :create,:destroy, :resend_activation_email] do
     patch :resend_activation_email, only: [:edit], path: "resend"
