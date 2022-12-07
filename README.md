@@ -56,7 +56,7 @@ Content-Type always required.
 ```
 --header 'Content-Type: application/json'
 ```
-Accept is not strictly nessisary, but would be good to include
+Accept is not strictly necessary, but would be good to include
 ```
 --header 'Accept: application/json'
 ```
