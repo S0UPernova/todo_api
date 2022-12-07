@@ -7,6 +7,6 @@ class HomeController < ApplicationController
     #   # format.html  { render :json => {docs: 'coming'} }
     #   format.json  { render :json => {docs: 'coming soon'} }
     # end
-    render :json => {docs: 'coming soon'}
+    render :json => {go_to_docs: 'https://github.com/S0UPernova/todo_api/blob/main/README.md'}
   end
 end
