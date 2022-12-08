@@ -13,8 +13,15 @@ class ProjectsDestroyTest < ActionDispatch::IntegrationTest
       delete team_project_url(@team, @project),
         headers: { 'Authorization' => "#{User.new_token(@first_user)}" }, as: :json
     end
-  
     assert_response :no_content
+  end
+  
+  test "deleting team should destroy tasks for the project" do
+    assert_difference('Task.count', -2) do
+      delete team_project_url(@team, @project),
+        headers: { 'Authorization' => "#{User.new_token(@first_user)}" }
+      assert_response :success
+    end
   end
 
   test "should not destroy project without authorization header" do

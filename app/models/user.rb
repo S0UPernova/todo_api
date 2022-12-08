@@ -10,9 +10,9 @@ class User < ApplicationRecord
   validates :handle, presence: true, length: { maximum: 50}
   validates :name, presence: true, length: { maximum: 50}
   has_many :teams_relationships, dependent: :destroy
-  has_many :memberships, through: :teams_relationships, source: :team
+  has_many :memberships, through: :teams_relationships, source: :team, dependent: :destroy
   has_many :team_requests, dependent: :destroy
-  has_many :requests, through: :team_requests, source: :team
+  has_many :requests, through: :team_requests, source: :team, dependent: :destroy
   VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
