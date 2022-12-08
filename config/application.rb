@@ -48,13 +48,13 @@ module ToDoApi
     end
 
 
-    # Rails.application.config.middleware.insert_before 0, Rack::Cors do
-    #   allow do
-    #     origins ENV['ORIGIN']
-    #     resource '*',
-    #     headers: :any,
-    #     methods: [:get, :patch, :delete, :post]
-    #   end
-    # end
+    Rails.application.config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins ENV['ORIGIN']
+        resource '*',
+        headers: :any,
+        methods: [:get, :patch, :delete, :post]
+      end
+    end
   end
 end

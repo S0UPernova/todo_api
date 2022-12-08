@@ -60,7 +60,8 @@
 #     # password: "please use keys"
 #   }
 
-server 'ec2-52-9-219-7.us-west-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{app db web}
+server '52.9.219.7', user: 'ubuntu', roles: %w{app db web}
+# server 'todo-api.me', user: 'ubuntu', roles: %w{app db web}
 set :branch, "main"
 set :stage, :production
 # set :default_env, { 'PASSENGER_INSTANCE_REGISTRY_DIR' => '/home/ubuntu/passenger_temp' }
