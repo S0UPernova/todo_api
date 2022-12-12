@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   # default from: 'notifications@example.com'
-  
+  helper MailerHelper
   def welcome_email
     @user = params[:user]
     @url = "http://#{ENV['DOMAIN']}/login"
