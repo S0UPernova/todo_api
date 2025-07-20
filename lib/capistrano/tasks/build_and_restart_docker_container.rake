@@ -4,7 +4,7 @@ namespace :deploy do
     on roles(:web) do |host|
       within(File.join(fetch(:deploy_to), 'current')) do
         info "docker compose build on #{host}"
-        execute(*%w[docker compose build -f docker-compose.yml -f docker-compose.prod.yml --platform linux/arm64 -t todo_api .])
+        execute(*%w[docker compose build -f docker-compose.yml -f docker-compose.prod.yml --platform linux/arm64 --no-cache -t todo_api .])
 
         info "docker compose up -d db (Make sure the database container is up)"
         execute(*%w[docker compose up -d db])
