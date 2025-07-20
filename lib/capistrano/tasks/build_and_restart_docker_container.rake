@@ -13,7 +13,7 @@ namespace :deploy do
         execute(*%[docker compose run web bundle exec rake db:create db:migrate])
 
         info "docker compose restart on  #{host}"
-        execute(*%[docker compose -f docker-compose-yml -f docker-compose.production.yml --no-deps -d restart web])
+        execute(*%[docker compose -f docker-compose-yml -f docker-compose.prod.yml --no-deps -d restart web])
       end
     end
   end

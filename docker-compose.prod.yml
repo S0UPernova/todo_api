@@ -12,6 +12,8 @@ services:
         #- PASSENGER_MIN_INSTANCES=2
       volumes:
         - ./storage:/app/storage
+        - /var/www/todo_api/shared/local_env.yml:/app/local_env.yml
+        - /var/www/todo_api/shared/log:/app/log
       ports:
         - "3000:3000"  # Passenger listens here
 
