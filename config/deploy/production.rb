@@ -61,7 +61,6 @@
 #   }
 
 server 'soupernova.tech', user: 'pi', roles: %w{app db web}
-# server 'todo-api.me', user: 'ubuntu', roles: %w{app db web}
 set :branch, "main"
 set :stage, :production
 after 'deploy:published', 'deploy:build_and_restart_docker_container'

@@ -4,7 +4,7 @@ namespace :deploy do
     on roles(:web) do |host|
       within(File.join(fetch(:deploy_to), 'current')) do
         info "docker compose build on #{host}"
-        execute(*%w[docker compose build])
+        execute(*%w[docker compose build --platform linux/arm64 -t todo_api .])
 
         info "docker compose up -d db (Make sure the database container is up)"
         execute(*%w[docker compose up -d db])
@@ -13,7 +13,7 @@ namespace :deploy do
         # execute(*%[docker compose run web bundle exec rake db:create db:migrate])
 
         info "docker compose restart on  #{host}"
-        execute(*%[docker compose -f docker-compose-yml -f docker-compose.prod.yml --no-deps -d restart web])
+        execute(*%[docker compose -f docker-compose.yml -f docker-compose.prod.yml --no-deps -d restart web])
       end
     end
   end
