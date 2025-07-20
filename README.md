@@ -69,12 +69,72 @@ Authorization required for most endpoints.
 <hr>
 <br>
 
+## Mailers
+
+<br>
+
+### Account activation
+  - contains link to "#{ENV["ORIGIN]}/activate" with ACTIVATION_TOKEN, and USER_EMAIL in URL params
+    - ACTIVATION_TOKEN = The users activation token to create their activation digest
+    - USER_EMAIL = The users email address
+
+<br>
+
+### Password reset / Forgot password
+  - contains link to "#{ENV["ORIGIN]}/reset" with RESET_TOKEN, and USER_EMAIL in URL params
+    - RESET_TOKEN = The users reset token to create their reset digest
+    - USER_EMAIL = The users email address
+
+<br>
+<hr>
+<br>
+
 ## Endponts
+
+<br>
+
+### Account activation
+ - Activation: GET /account_activations/ACTIVATION_TOKEN/edit?email=USER_EMAIL
+   - ACTIVATION_TOKEN = The activation token used to make their activation_digest
+   - USER_EMAIL = The users email address
+
+<br> 
+
+### Password reset / Forgot password
+
+- New password reset token: POST /password_resets/?email=USER_EMAIL
+  - USER_EMAIL = The users email address
+  - Returns
+      ```
+      // coming soon... ish
+      ```
+<br>
+
+- Set new password: PATCH /password_resets/RESET_TOKEN/?email=USER_EMAIL
+  - RESET_TOKEN = the users reset token used to make their reset digest
+  - USER_EMAIL = The users email address
+  - Takes params
+    ```
+    {
+        "user": {
+          "password": "required, limit 140 characters",
+          "password_confirmation": "required, limit 140 characters"
+        }
+      }
+    ```
+  - Returns
+  ```
+  // coming soon... ish
+  ```
+
 <br>
 
 ### Token
+
+<br>
+
 - New token: POST /login
-  - takes params
+  - Takes params
     ```
     {
       "user": {
@@ -83,6 +143,10 @@ Authorization required for most endpoints.
       }
     }
     ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
 
 ### Users
@@ -90,18 +154,22 @@ Authorization required for most endpoints.
 <br>
 
 - Create: POST /users
-  - takes params
-  ```
-  {
-    "user": {
-      "handle": "required, limit 50 characters",
-      "name": "required, limit 50 characters",
-      "email": "required, limit 255 characters",
-      "password": "required, limit 140 characters",
-      "password_confirmation": "required, limit 140 characters"
+  - Takes params
+    ```
+    {
+      "user": {
+        "handle": "required, limit 50 characters",
+        "name": "required, limit 50 characters",
+        "email": "required, limit 255 characters",
+        "password": "required, limit 140 characters",
+        "password_confirmation": "required, limit 140 characters"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
@@ -110,8 +178,8 @@ Authorization required for most endpoints.
 
 <br>
 
-- Show: GET /users/user_id
-  - user_id = the users id.
+- Show: GET /users/USER_ID
+  - USER_ID = the users id.
   - Requires valid token in header.
 
 <br>
@@ -119,28 +187,35 @@ Authorization required for most endpoints.
 - Edit: PATCH /users/ID
   - ID = the users id.
   - Requires the token belonging to the user in header.
-  - takes some or all of these params.
   - password, password_confirmation, and current_password fields are required to update password
-
-  ```
-  {
-    "user": {
-      "handle": "User",
-      "name": "userName",
-      "email": "user@example.com",
-      "password": "foobar",
-      "password_confirmation": "foobar",
-      "current_password": "barfoo"
+  - Takes some or all of these params.
+    ```
+    {
+      "user": {
+        "handle": "User",
+        "name": "userName",
+        "email": "user@example.com",
+        "password": "foobar",
+        "password_confirmation": "foobar",
+        "current_password": "barfoo"
+      }
     }
-  }
-  ```
+    ```
+
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /users/user_id
-  - user_id = the users id.
+- Delete: DELETE /users/USER_ID
+  - USER_ID = the users id.
   - Requires the token belonging to the user in header.
-  
+  - Returns
+    ```
+    // status no content
+    ```
   <br>
 
 ### Teams
@@ -149,112 +224,148 @@ Authorization required for most endpoints.
 
 - Create: POST /teams
   - Requires valid token in header.
-  - takes params
-  ```
-  {
-    "team": {
-      "name": "required, limit 50 characters",
-      "description": "limit 140 characters"
+  - Takes params
+    ```
+    {
+      "team": {
+        "name": "required, limit 50 characters",
+        "description": "limit 140 characters"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
 - Index: GET /teams
   - Requires valid token in header.
-
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
 
 - Discover: GET /teams/discover
   - Requires valid token in header.
-  
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
 
-- Show: GET /teams/team_id
-  - team_id = the teams id.
+- Show: GET /teams/TEAM_ID
+  - TEAM_ID = the teams id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
 - Edit: PATCH /teams/ID
   - ID = the teams id.
   - Requires the token belonging to the team owner in header.
-  - takes some or all of these params.
-
-  ```
-  {
-    "team": {
-      "name": "A fantastic team name",
-      "description": "a short-ish description of the team"
+  - Takes some or all of these params.
+    ```
+    {
+      "team": {
+        "name": "A fantastic team name",
+        "description": "a short-ish description of the team"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /teams/team_id
-  - team_id = the teams id.
+- Delete: DELETE /teams/TEAM_ID
+  - TEAM_ID = the teams id.
   - Requires the token belonging to the team owner in header.
-    
+  - Returns
+    ```
+    // status no content
+    ```
   <br>
 
 ### Projects
 
 <br>
 
-- Create: POST /team/team_id/projects
-  - team_id = the teams id.
+- Create: POST /team/TEAM_ID/projects
+  - TEAM_ID = the teams id.
   - Requires valid token in header.
   - Requires team to exist.
-  - takes params
-  ```
-  {
-    "project": {
-      "name": "required, limit 50 characters",
-      "description": "limit 140 characters",
-      "requirements": "limit 500 characters, can be stringified json"
+  - Takes params
+    ```
+    {
+      "project": {
+        "name": "required, limit 50 characters",
+        "description": "limit 140 characters",
+        "requirements": "limit 500 characters, can be stringified json"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Index: GET /teams/team_id/projects
-  -  team_id = the teams id.
+- Index: GET /teams/TEAM_ID/projects
+  -  TEAM_ID = the teams id.
   - Requires valid token in header.
-
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
 
-- Show: GET /teams/team_id/projects/project_id
-  - team_id = the teams id.
-  - project_id = the project id.
+- Show: GET /teams/TEAM_ID/projects/PROJECT_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
   - Requires valid token in header.
-
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
   
-- Edit: PATCH /teams/team_id/projects/project_id
-  - team_id = the teams id.
-  - project_id = the project id.
+- Edit: PATCH /teams/TEAM_ID/projects/PROJECT_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
   - Requires the token belonging to the team owner in header.
-  - takes some or all of these params.
-
-  ```
-  {
-    "project": {
-      "name": "A cool name for the project",
-      "description": "a short-ish description of the project goals",
-      "requirements": "[\"does stuff\", \"must not do certain stuff\", \"does more stuff\" ]"
+  - Takes some or all of these params.
+    ```
+    {
+      "project": {
+        "name": "A cool name for the project",
+        "description": "a short-ish description of the project goals",
+        "requirements": "[\"does stuff\", \"must not do certain stuff\", \"does more stuff\" ]"
+      }
     }
-  }
-  ```
-
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 <br>
 
-- Delete: DELETE /teams/team_id/projects/project_id
-  - team_id = the teams id.
-  - project_id = the project id.
+- Delete: DELETE /teams/TEAM_ID/projects/PROJECT_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
   - Requires the token belonging to the team owner in header.
+  - Returns
+    ```
+    // status no content
+    ```
 
 <br>
 
@@ -262,67 +373,86 @@ Authorization required for most endpoints.
 
 <br>
 
-- Create: POST /team/projects/project_id/tasks
-  - team_id = the teams id.
-  - project_id = the projects id.
+- Create: POST /team/projects/PROJECT_ID/tasks
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the projects id.
   - Requires valid token in header.
   - Requires team and project to exist.
-  - takes params
-  ```
-  {
-    "task": {
-      "name": "required, limit 50 characters",
-      "description": "limit 240 characters",
-      "completed": "boolean, false by default",
-      "duedate": "datetime, null by default",
-      "completed_at": "datetime, null by default"
+  - Takes params
+    ```
+    {
+      "task": {
+        "name": "required, limit 50 characters",
+        "description": "limit 240 characters",
+        "completed": "boolean, false by default",
+        "duedate": "datetime, null by default",
+        "completed_at": "datetime, null by default"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
   
-- Index: GET /teams/team_id/projects/project_id/tasks
-  - team_id = the teams id.
-  - project_id = the projects id.
+- Index: GET /teams/TEAM_ID/projects/PROJECT_ID/tasks
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the projects id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
   
-- Show: GET /teams/team_id/projects/project_id/tasks/task_id
-  - team_id = the teams id.
-  - project_id = the project id.
-  - task_id = the tasks id.
+- Show: GET /teams/TEAM_ID/projects/PROJECT_ID/tasks/TASK_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
+  - TASK_ID = the tasks id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
   
-- Edit: PATCH /teams/team_id/projects/project_id/tasks/task_id
-  - team_id = the teams id.
-  - project_id = the project id.
-  - task_id = the tasks id.
+- Edit: PATCH /teams/TEAM_ID/projects/PROJECT_ID/tasks/TASK_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
+  - TASK_ID = the tasks id.
   - Requires the token belonging to the team owner in header.
-  - takes some or all of these params.
-
-  ```
-  {
-    "task": {
-      "name": "A name that accurately sums up the task",
-      "description": "A descriptive description describing the task at hand",
-      "completed": true,
-      "duedate": ""2022-05-05T22:19:32.473Z",
-      "completed_at": "2022-03-05T22:19:32.473Z"
+  - Takes some or all of these params.
+    ```
+    {
+      "task": {
+        "name": "A name that accurately sums up the task",
+        "description": "A descriptive description describing the task at hand",
+        "completed": true,
+        "duedate": ""2022-05-05T22:19:32.473Z",
+        "completed_at": "2022-03-05T22:19:32.473Z"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
   
-- Delete: DELETE /teams/team_id/projects/project_id/tasks/task_id
-  - team_id = the teams id.
-  - project_id = the project id.
-  - task_id = the tasks id.
+- Delete: DELETE /teams/TEAM_ID/projects/PROJECT_ID/tasks/TASK_ID
+  - TEAM_ID = the teams id.
+  - PROJECT_ID = the project id.
+  - TASK_ID = the tasks id.
   - Requires the token belonging to the team owner in header.
+  - Returns
+    ```
+    // status no content
+    ```
 
 
 ### Memberships / members
@@ -332,45 +462,69 @@ Authorization required for most endpoints.
 
 #### User routes
 
-- Index: GET /users/user_id/memberships.
-  - user_id = the users id.
+- Index: GET /users/USER_ID/memberships.
+  - USER_ID = the users id.
   - Requires valid token belonging to the user in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Show: GET /users/user_id/requests/membership_id
-  - user_id = the users id.
-  - membership_id = the membership id.
+- Show: GET /users/USER_ID/requests/MEMBERSHIP_ID
+  - USER_ID = the users id.
+  - MEMBERSHIP_ID = the membership id.
   - Requires valid token belonging to the user in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /users/user_id/members/membership_id
-  - user_id = the users id.
-  - membership_id = the memberships id.
+- Delete: DELETE /users/USER_ID/members/MEMBERSHIP_ID
+  - USER_ID = the users id.
+  - MEMBERSHIP_ID = the memberships id.
   - Requires valid token belonging to the user in header.
+  - Returns
+    ```
+    // status no content
+    ```
 
 <br>
 
 #### Team routes
 
-- Index: GET /teams/team_id/members.
-  - team_id = the teams id.
+- Index: GET /teams/TEAM_ID/members.
+  - TEAM_ID = the teams id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Show: GET /teams/team_id/members/membership_id
-  - team_id = the teams id.
-  - membership_id = the memberships id.
+- Show: GET /teams/TEAM_ID/members/MEMBERSHIP_ID
+  - TEAM_ID = the teams id.
+  - MEMBERSHIP_ID = the memberships id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /teams/team_id/members/membership_id
-  - team_id = the teams id.
-  - membership_id = the membership id.
+- Delete: DELETE /teams/TEAM_ID/members/MEMBERSHIP_ID
+  - TEAM_ID = the teams id.
+  - MEMBERSHIP_ID = the membership id.
   - Requires the token belonging to the team owner in header.
+  - Returns
+    ```
+    // status no content
+    ```
 
 <br>
 
@@ -380,100 +534,148 @@ Authorization required for most endpoints.
 
 #### User routes
 
-- Create: POST /users/user_id/requests
+- Create: POST /users/USER_ID/requests
 
   - This is used by a team owner to send a request to a user
 
-  - user_id = the users id
-  - takes params
-  ```
-  {
-    "team": {
-      "team_id": "required, integer team id, team must exist, and you must be the owner"
+  - USER_ID = the users id
+  - Takes params
+    ```
+    {
+      "team": {
+        "TEAM_ID": "required, integer team id, team must exist, and you must be the owner"
+      }
     }
-  }
-  ```
+    ```
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Index: GET /users/user_id/requests.
-  - user_id = the users id.
+- Index: GET /users/USER_ID/requests.
+  - USER_ID = the users id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Show: GET /users/user_id/requests/request_id
-  - user_id = the users id.
-  - request_id = the requests id.
+- Show: GET /users/USER_ID/requests/REQUEST_ID
+  - USER_ID = the users id.
+  - REQUEST_ID = the requests id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /users/user_id/requests/request_id
-  - user_id = the users id.
-  - request_id = the requests id.
+- Delete: DELETE /users/USER_ID/requests/REQUEST_ID
+  - USER_ID = the users id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the user in header.
   - user must be the sender of the request.
+  - Returns
+    ```
+    // status no content
+    ```
   
 <br>
 
-- Accept: PATCH /users/user_id/requests/request_id/accept
-  - user_id = the users id.
-  - request_id = the requests id.
+- Accept: PATCH /users/USER_ID/requests/REQUEST_ID/accept
+  - USER_ID = the users id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the user in header.
   - user must be the recipient of the request.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
   
 <br>
 
-- Reject: PATCH /users/user_id/requests/request_id/reject
-  - user_id = the users id.
-  - request_id = the requests id.
+- Reject: PATCH /users/USER_ID/requests/REQUEST_ID/reject
+  - USER_ID = the users id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the user in header.
   - user must be the recipient of the request.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
   
 <br>
 
 #### Team routes
 
-- Create: POST /teams/team_id/requests
+- Create: POST /teams/TEAM_ID/requests
   - This is used by a user to send a request to a team
-  - team_id = the teams id.
+  - TEAM_ID = the teams id.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Index: GET /teams/team_id/requests.
-  - team_id = the teams id.
+- Index: GET /teams/TEAM_ID/requests.
+  - TEAM_ID = the teams id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Show: GET /teams/team_id/requests/request_id
-  - team_id = the teams id.
-  - request_id = the requests id.
+- Show: GET /teams/TEAM_ID/requests/REQUEST_ID
+  - TEAM_ID = the teams id.
+  - REQUEST_ID = the requests id.
   - Requires valid token in header.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Delete: DELETE /teams/team_id/requests/request_id
-  - team_id = the teams id.
-  - request_id = the requests id.
+- Delete: DELETE /teams/TEAM_ID/requests/REQUEST_ID
+  - TEAM_ID = the teams id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the team owner in header.
   - team must be the sender of the request.
+  - Returns
+    ```
+    // status no content
+    ```
 
 <br>
 
-- Accept: PATCH /teams/team_id/requests/request_id/accept
-  - team_id = the teams id.
-  - request_id = the requests id.
+- Accept: PATCH /teams/TEAM_ID/requests/REQUEST_ID/accept
+  - TEAM_ID = the teams id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the team owner in header.
   - team must be the recipient of the request.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>
 
-- Reject: PATCH /teams/team_id/requests/request_id/reject
-  - team_id = the teams id.
-  - request_id = the requests id.
+- Reject: PATCH /teams/TEAM_ID/requests/REQUEST_ID/reject
+  - TEAM_ID = the teams id.
+  - REQUEST_ID = the requests id.
   - Requires the token belonging to the team owner in header.
   - team must be the recipient of the request.
+  - Returns
+    ```
+    // coming soon... ish
+    ```
 
 <br>

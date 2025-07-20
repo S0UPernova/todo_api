@@ -16,12 +16,12 @@ lock "~> 3.17.1"
 # require 'rbenv/capistrano'
 # require 'bundler/capistrano'
 
-set :rbenv_type, :user
+# set :rbenv_type, :user
 
 set :application, "todo_api"
-set :domain, 'http://ec2-52-9-219-7.us-west-1.compute.amazonaws.com/'
+set :domain, 'http://soupernova.tech/'
 
-set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
+# set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
@@ -32,19 +32,19 @@ set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistra
 
 #deployment details
 set :deploy_via, :copy
-set :user, "ubuntu"
+set :user, "pi"
 set :copy_compression, :bz2
 set :git_shallow_clone, 1
 set :scm_verbose, true
 set :use_sudo, false
-set :deploy_to, "/home/ubuntu/#{fetch :application}"
+set :deploy_to, "/var/www/#{fetch :application}"
 
 # set :asset_roles, []
 
 # default_run_options[:pty] = true
 set :ssh_options, {:forward_agent => true}
 set :ssh_options, {:auth_methods => "publickey"}
-set :ssh_options, {:keys => ["~/.ssh/todo_api.pem"]}
+set :ssh_options, {:keys => ["~/.ssh/id_rsa"]}
 
 #repo details
 # set :scm, :git
@@ -78,8 +78,7 @@ set :keep_releases, 2
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", 'config/master.key'
-
+append :linked_files, "config/database.yml", 'config/master.key'
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
 
