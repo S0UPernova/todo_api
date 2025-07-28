@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  web:
+    build: .
+    command: 
+      - sh 
+      - -c
+      - |
+        rm -f tmp/pids/server.pid
+        rails server -b 0.0.0.0
+    volumes:
+      - .:/app
+    environment:
+      RAILS_ENV: production
+      RAILS_RELATIVE_URL_ROOT: /
+      RAILS_SERVE_STATIC_FILES: true
+      RACK_ENV: production
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DATABASE_URL: "postgres://postgres:password@db:5432"
+      SECRET_KEY_BASE: dummy
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  postgres:
