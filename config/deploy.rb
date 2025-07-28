@@ -22,9 +22,9 @@ set :application, "todo_api"
 set :domain, 'http://soupernova.tech/'
 
 # set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/master.key local_env.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 # Roles
 # role :web, domain
 # role :app, domain
@@ -50,6 +50,7 @@ set :ssh_options, {:keys => ["~/.ssh/id_rsa"]}
 # set :scm, :git
 set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
+set :docker_compose_file 'docker-compose.yml'
 
 # set :scm_username, 'S0UPernova'
 set :keep_releases, 2
