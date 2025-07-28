@@ -50,7 +50,7 @@ set :ssh_options, {:keys => ["~/.ssh/id_rsa"]}
 # set :scm, :git
 set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
-set :docker_compose_file 'docker-compose.yml'
+set :docker_compose_file, 'docker-compose.yml'
 
 # set :scm_username, 'S0UPernova'
 set :keep_releases, 2
