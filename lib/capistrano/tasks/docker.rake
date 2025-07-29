@@ -26,13 +26,13 @@ namespace :docker do
   task :restart do
     on roles(:app) do
       within release_path do
-        execute :docker, :compose, '-f', fetch(:docker_compose_file), 'down'
-        execute :docker, :compose, '-f', fetch(:docker_compose_file), 'up', '-d', '--build'
+        execute :docker, :compose, '-f', fetch(:docker_compose_file), 'down -v --remove-orphans'
+        execute :docker, :compose, '-f', fetch(:docker_compose_file), 'up', '-d'
       end
     end
   end
 end
 
 # Hook into the deployment flow
-# after 'deploy:published', 'deploy:docker_build'
-# after 'deploy:docker_build', 'deploy:docker_restart'
+after 'deploy:published', 'docker:build'
+after 'docker:build', 'docker:restart'

@@ -67,14 +67,7 @@ set :stage, :production
 append :copy_files, '.env.production.local'
 #set :migration_role, false
 Rake::Task['deploy:migrate'].clear_actions
-# after 'deploy:published', 'docker:build'
-# after 'docker:build', 'docker:restart'
-after 'deploy:updated', :docker_up do
-  on roles(:app) do
-    within release_path do
-      execute :docker, :compose, :up, '-d', '--build'
-    end
-  end
-end
+
+
 #after 'deploy:published', 'deploy:build_and_restart_docker_container'
 # set :default_env, { 'PASSENGER_INSTANCE_REGISTRY_DIR' => '/home/ubuntu/passenger_temp' }
