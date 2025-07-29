@@ -63,5 +63,11 @@
 server 'soupernova.tech', user: 'pi', roles: %w{app db web}
 set :branch, "main"
 set :stage, :production
-after 'deploy:published', 'deploy:build_and_restart_docker_container'
+append :linked_files, 'production.env'
+append :copy_files, 'production.env'
+#set :migration_role, false
+Rake::Task['deploy:migrate'].clear_actions
+after 'deploy:published', 'docker:build'
+after 'docker:build', 'docker:restart'
+#after 'deploy:published', 'deploy:build_and_restart_docker_container'
 # set :default_env, { 'PASSENGER_INSTANCE_REGISTRY_DIR' => '/home/ubuntu/passenger_temp' }

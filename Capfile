@@ -5,10 +5,11 @@ require "capistrano/setup"
 require "capistrano/deploy"
 # require 'capistrano/rails/assets'
 
-require 'capistrano/rails/migrations'
+require "capistrano/rails/migrations"
+require "capistrano/copy_files"
 
 # require 'capistrano/rails'
-require 'capistrano/passenger'
+#require 'capistrano/passenger'
 # require 'capistrano/rbenv'
 # set :rbenv_type, :user
 # set :rbenv_ruby, '2.7.2'
@@ -21,6 +22,9 @@ require 'capistrano/passenger'
 # require "capistrano/scm/svn"
 # install_plugin Capistrano::SCM::Svn
 # or
+set :copy_files, 'config/master.key'
+set :copy_file_flags, ""
+set :copy_dir_flags, "-R"
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 

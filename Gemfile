@@ -25,6 +25,9 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'jwt', '~> 2.3'
 
+# Environment variable loading
+gem 'dotenv'
+
 #group :production do
   gem 'pg', '~> 1.4', '>= 1.4.5'
 #end
@@ -46,6 +49,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rbenv'
+  gem 'capistrano-copy-files'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,5 +1,6 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
+require "dotenv"
 
 # set :application, "todo_api"
 # set :repo_url, "git@github.com:S0UPernova/todo_api.git"
@@ -22,7 +23,7 @@ set :application, "todo_api"
 set :domain, 'http://soupernova.tech/'
 
 # set :rbenv_prefix, '/usr/bin/rbenv exec' # Cf issue: https://github.com/capistrano/rbenv/issues/96
-set :linked_files, %w{config/database.yml config/master.key local_env.yml}
+set :linked_files, %w{config/database.yml config/master.key}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 # Roles
@@ -38,6 +39,7 @@ set :git_shallow_clone, 1
 set :scm_verbose, true
 set :use_sudo, false
 set :deploy_to, "/var/www/#{fetch :application}"
+set :passenger_in_gemfile, true
 
 # set :asset_roles, []
 
@@ -51,14 +53,19 @@ set :ssh_options, {:keys => ["~/.ssh/id_rsa"]}
 set :repository,  "git@github.com:S0UPernova/todo_api.git"
 set :repo_url, "https://github.com/S0UPernova/todo_api.git"
 set :docker_compose_file, 'docker-compose.yml'
+set :docker_project_name, 'todo_api'
 
 # set :scm_username, 'S0UPernova'
 set :keep_releases, 2
+set :copy_target, -> { "#{shared_path}" }
+before 'deploy:check:linked_files', 'copy_files:copy'
+before 'deploy:starting', :load_dotenv do
+  Dotenv.load(
+    ".env.#{fetch(:stage)}",  # stage-specific (production/staging)
+    ".env.#{fetch(:stage)}.local"
+  )
+end
 # set :branch, "master"
-
-
-
-
 
 # append :linked_files, 'config/database.yml', 'config/master.key'
 

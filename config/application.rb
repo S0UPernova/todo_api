@@ -14,6 +14,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require "dotenv"
 
 # Require the gems listed in Gemfile, including any gems
 Bundler.require(*Rails.groups)
@@ -37,14 +38,19 @@ module ToDoApi
     config.api_only = true
 
     # config.assets.enabled = false
-
+    Dotenv.load(
+      '.env',                             # Base defaults
+      ".env.#{Rails.env}.local",          # Local overrides (ignored by git)
+      ".env.#{Rails.env}",                # Environment-specific
+      ".env.local"                        # Local developer overrides
+    )
     
-    config.before_configuration do
-      env_file = File.join(Rails.root, 'config', 'local_env.yml')
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value.to_s
-      end if File.exists?(env_file)
-    end
+    # config.before_configuration do
+    #   env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    #   YAML.load(File.open(env_file)).each do |key, value|
+    #     ENV[key.to_s] = value.to_s
+    #   end if File.exists?(env_file)
+    # end
 
     # Rails.application.config.middleware.insert_before 0, Rack::Cors do
     #   allow do
