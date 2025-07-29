@@ -17,7 +17,7 @@ namespace :docker do
   # end
   task :build do
     on roles(:app) do
-      within release_path do
+      within current_path do
         execute :docker, :compose, '-f', fetch(:docker_compose_file), 'build'
       end
     end
@@ -25,7 +25,7 @@ namespace :docker do
 
   task :restart do
     on roles(:app) do
-      within release_path do
+      within current_path do
         execute :docker, :compose, '-f', fetch(:docker_compose_file), 'down -v --remove-orphans'
         execute :docker, :compose, '-f', fetch(:docker_compose_file), 'up', '-d'
       end
