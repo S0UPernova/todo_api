@@ -2,12 +2,12 @@ FROM arm64v8/ruby:2.7.2
 # 1. Setup directory
 RUN mkdir /app
 WORKDIR /app
-# 2. Update to use archived repositories and install dependencies
-RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
-    sed -i 's|security.debian.org|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
-    apt-get update -qq && \
-    apt-get install -y postgresql-client && \
-    rm -rf /var/lib/apt/lists/*
+# 2. Install dependencies
+RUN apt-get update -qq && \
+   apt-get install -y \
+   build-essential \
+    postgresql-client libffi-dev libxml2-dev libxslt1-dev\
+RUN    rm -rf /var/lib/apt/lists/*
 
 
 # 3. Configure bundler
@@ -30,13 +30,11 @@ RUN bundle _2.4.22_ install \
             --retry=5
 COPY . /app
 
-ENV RAILS_SERVE_STATIC_FILES=true
+# ENV RAILS_SERVE_STATIC_FILES=true
 # RUN rails assets:precompile
 # RUN rails db:migrate
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-
+# COPY entrypoint.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bash"]
