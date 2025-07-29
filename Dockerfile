@@ -29,7 +29,7 @@ RUN bundle _2.4.22_ install \
 COPY . /app
 
 ENV RAILS_SERVE_STATIC_FILES=true
-RUN rails assets:precompile
+# RUN rails assets:precompile
 RUN rails db:migrate
 EXPOSE 3000
 CMD ["bash"]

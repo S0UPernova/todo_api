@@ -40,6 +40,7 @@ set :scm_verbose, true
 set :use_sudo, false
 set :deploy_to, "/var/www/#{fetch :application}"
 set :passenger_in_gemfile, true
+set :default_shell, '/bin/bash -l'  # Load login shell with profile
 
 # set :asset_roles, []
 

@@ -63,8 +63,8 @@
 server 'soupernova.tech', user: 'pi', roles: %w{app db web}
 set :branch, "main"
 set :stage, :production
-append :linked_files, 'production.env'
-append :copy_files, 'production.env'
+# append :linked_files, '.env.production.local'
+append :copy_files, '.env.production.local'
 #set :migration_role, false
 Rake::Task['deploy:migrate'].clear_actions
 after 'deploy:published', 'docker:build'
