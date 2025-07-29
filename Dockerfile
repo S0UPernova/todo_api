@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 # 2. Install dependencies
 RUN apt-get update -qq && \
-  #  apt-get install -y \
+   apt-get install -y \
   #  build-essential \
     postgresql-client
 RUN    rm -rf /var/lib/apt/lists/*
