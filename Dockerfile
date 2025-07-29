@@ -6,7 +6,7 @@ WORKDIR /app
 RUN apt-get update -qq && \
   #  apt-get install -y \
   #  build-essential \
-    postgresql-client \
+    postgresql-client
 RUN    rm -rf /var/lib/apt/lists/*
 
 
