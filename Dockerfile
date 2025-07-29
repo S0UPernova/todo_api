@@ -2,12 +2,12 @@ FROM arm64v8/ruby:2.7.2
 # 1. Setup directory
 RUN mkdir /app
 WORKDIR /app
-# 2. Install dependencies
-RUN apt-get update -qq && \
-   apt-get install -y \
-  #  build-essential \
-    postgresql-client
-RUN    rm -rf /var/lib/apt/lists/*
+# 2. Update to use archived repositories and install dependencies
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    apt-get update -qq && \
+    apt-get install -y postgresql-client && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # 3. Configure bundler
