@@ -3,14 +3,14 @@ FROM arm64v8/ruby:2.7.2
 RUN mkdir /app
 WORKDIR /app
 # 2. Install dependencies
-RUN apt-get update -qq && \
-    apt-get install -y \
-    build-essential \
-    postgresql-client \
-    libffi-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update -qq && \
+#     apt-get install -y \
+#     build-essential \
+#     postgresql-client \
+#     libffi-dev \
+#     libxml2-dev \
+#     libxslt1-dev \
+RUN rm -rf /var/lib/apt/lists/*
 
 
 # 3. Configure bundler
@@ -34,8 +34,8 @@ RUN bundle _2.4.22_ install \
 COPY . /app
 
 # ENV RAILS_SERVE_STATIC_FILES=true
-RUN rails assets:precompile
-RUN rails db:migrate
+# RUN rails assets:precompile
+# RUN rails db:migrate
 # COPY entrypoint.sh /usr/local/bin/
 # RUN chmod +x /usr/local/bin/entrypoint.sh
 
